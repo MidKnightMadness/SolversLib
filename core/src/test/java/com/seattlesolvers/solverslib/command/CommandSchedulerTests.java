@@ -1,26 +1,26 @@
 package com.seattlesolvers.solverslib.command;
 
+import static org.junit.Assert.assertEquals;
+
 import com.seattlesolvers.solverslib.command.button.Trigger;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class CommandSchedulerTests {
 
     public static int x = 3;
     private boolean val = false;
 
-    @BeforeEach
+    @Before
     public void setup() {
         x = 3;
         val = false;
         Robot.enable();
     }
 
-    @AfterEach
+    @After
     public void teardown() {
         CommandScheduler.getInstance().reset();
     }
@@ -33,34 +33,34 @@ public class CommandSchedulerTests {
         );
         assertEquals(3, x);
         CommandScheduler.getInstance().run();
-        assertEquals(3, x, "The value of x should have updated");
+        assertEquals("The value of x should have updated", 3, x);
 
         updateValue();
         CommandScheduler.getInstance().run();
         assertEquals(5, x);
         CommandScheduler.getInstance().run();
-        assertEquals(5, x, "The value of x should not have updated");
+        assertEquals("The value of x should not have updated", 5, x);
 
         updateValue();
         CommandScheduler.getInstance().run();
-        assertEquals(5, x, "The value of x should not have updated");
+        assertEquals("The value of x should not have updated", 5, x);
         updateValue();
         CommandScheduler.getInstance().run();
-        assertEquals(3, x, "The value of x should have updated");
+        assertEquals("The value of x should have updated", 3, x);
 
         updateValue();
         CommandScheduler.getInstance().run();
-        assertEquals(3, x, "The value of should not have updated");
+        assertEquals("The value of should not have updated", 3, x);
         updateValue();
         CommandScheduler.getInstance().run();
-        assertEquals(5, x, "The value of x should have updated");
+        assertEquals("The value of x should have updated", 5, x);
 
         updateValue();
         CommandScheduler.getInstance().run();
-        assertEquals(5, x, "The value of should not have updated");
+        assertEquals("The value of should not have updated", 5, x);
         updateValue();
         CommandScheduler.getInstance().run();
-        assertEquals(3, x, "The value of x should have updated");
+        assertEquals("The value of x should have updated", 3, x);
     }
 
     @Test

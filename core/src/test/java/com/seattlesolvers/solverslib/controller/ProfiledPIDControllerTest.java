@@ -1,15 +1,15 @@
 package com.seattlesolvers.solverslib.controller;
 
+import static org.junit.Assert.assertEquals;
+
 import com.seattlesolvers.solverslib.controller.wpilibcontroller.ProfiledPIDController;
 import com.seattlesolvers.solverslib.trajectory.TrapezoidProfile;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Test;
 
 public class ProfiledPIDControllerTest {
     @Test
-    void testStartFromNonZeroPosition() {
+    public void testStartFromNonZeroPosition() {
         ProfiledPIDController controller = new ProfiledPIDController(1.0, 0.0, 0.0,
                 new TrapezoidProfile.Constraints(1.0, 1.0));
 

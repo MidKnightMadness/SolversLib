@@ -1,11 +1,11 @@
 package com.seattlesolvers.solverslib.hardware.motors;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.function.Supplier;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EncoderTest {
 
@@ -15,7 +15,7 @@ public class EncoderTest {
     public static final double CONSTANT = 10;
 
     @Test
-    @BeforeEach
+    @Before
     public void testCreateEncoder() {
         motor = new MockMotor();
         encoder = motor.encoder.setDistancePerPulse(CONSTANT);
@@ -25,15 +25,16 @@ public class EncoderTest {
     public void testGetValue() {
         assertEquals(0, encoder.getPosition());
         assertEquals(1, encoder.getPosition());
-        assertEquals(20, encoder.getDistance());
+        // see https://en.wikipedia.org/wiki/Machine_epsilon
+        assertEquals(20, encoder.getDistance(), 2.22e-16);
         assertEquals(3, motor.getCurrentPosition());
     }
 
-    private class MockMotor {
+    private static class MockMotor {
         private int position;
         private MockEncoder encoder;
 
-        private class MockEncoder {
+        private static class MockEncoder {
             private Supplier<Integer> m_supplier;
             private double dpp;
 

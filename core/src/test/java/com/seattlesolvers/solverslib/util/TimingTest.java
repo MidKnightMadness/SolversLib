@@ -1,13 +1,13 @@
 package com.seattlesolvers.solverslib.util;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.concurrent.TimeUnit;
 
 import static com.seattlesolvers.solverslib.util.Timing.Timer;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Test;
 
 public class TimingTest {
     private Timer timer;
@@ -39,7 +39,7 @@ public class TimingTest {
         assertTrue(end - start >= minMillis);
     }
 
-    @BeforeEach
+    @Before
     public void reset() {
         timer = new Timer(seconds, TimeUnit.SECONDS);
     }

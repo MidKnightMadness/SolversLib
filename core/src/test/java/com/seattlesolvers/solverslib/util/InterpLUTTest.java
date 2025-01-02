@@ -1,8 +1,8 @@
 package com.seattlesolvers.solverslib.util;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Test;
 
 public class InterpLUTTest {
 
@@ -61,7 +61,8 @@ public class InterpLUTTest {
             lut.add(i, i + 1);
         }
         lut.createLUT();
-        assertEquals(lut.get(85.5), 86.5);
+        // see https://en.wikipedia.org/wiki/Machine_epsilon
+        assertEquals(lut.get(85.5), 86.5, 2.22e-16);
     }
 
 }

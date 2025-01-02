@@ -1,22 +1,22 @@
 package com.seattlesolvers.solverslib.controller;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
 
 public class PIDInputOutputTest {
     private PIDController m_controller;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         m_controller = new PIDController(0, 0, 0);
     }
 
     @Test
-    void proportionalGainOutputTest() {
+    public void proportionalGainOutputTest() {
         m_controller.setP(4);
 
         m_controller.setSetPoint(1000);
@@ -27,7 +27,7 @@ public class PIDInputOutputTest {
     }
 
     @Test
-    void integralGainOutputTest() {
+    public void integralGainOutputTest() {
         m_controller.setI(4);
         m_controller.setIntegrationBounds(-180, 180);
 
@@ -41,28 +41,30 @@ public class PIDInputOutputTest {
     }
 
     @Test
-    void derivativeGainOutputTest() {
+    public void derivativeGainOutputTest() {
         m_controller.setD(4);
 
         m_controller.setSetPoint(1000);
         m_controller.setTolerance(Double.MAX_VALUE, 1);
         assertFalse(m_controller.atSetPoint());
 
-        assertEquals(0, m_controller.calculate(0, 0));
+        // see https://en.wikipedia.org/wiki/Machine_epsilon
+        assertEquals(0, m_controller.calculate(0, 0), 2.22e-16);
 
         assertEquals(m_controller.calculate(0.025, 0), -0.1 / m_controller.getPeriod(), 0.05);
     }
 
     @Test
-    void errorTolerancePeriodTest() {
+    public void errorTolerancePeriodTest() {
         m_controller.setP(0.5);
-        assertEquals(0, m_controller.getPeriod());
-        assertEquals(0, m_controller.getVelocityError());
-        assertEquals(Double.POSITIVE_INFINITY, m_controller.getTolerance()[1]);
+        // see https://en.wikipedia.org/wiki/Machine_epsilon
+        assertEquals(0, m_controller.getPeriod(), 2.22e-16);
+        assertEquals(0, m_controller.getVelocityError(), 2.22e-16);
+        assertEquals(Double.POSITIVE_INFINITY, m_controller.getTolerance()[1], 2.22e-16);
         m_controller.setSetPoint(100);
-        assertEquals(100, m_controller.getPositionError());
-        assertEquals(0, m_controller.getPeriod());
-        assertEquals(Double.POSITIVE_INFINITY, m_controller.getVelocityError());
+        assertEquals(100, m_controller.getPositionError(), 2.22e-16);
+        assertEquals(0, m_controller.getPeriod(), 2.22e-16);
+        assertEquals(Double.POSITIVE_INFINITY, m_controller.getVelocityError(), 2.22e-16);
         assertFalse(m_controller.atSetPoint());
         m_controller.setTolerance(Double.POSITIVE_INFINITY);
         assertFalse(m_controller.atSetPoint());

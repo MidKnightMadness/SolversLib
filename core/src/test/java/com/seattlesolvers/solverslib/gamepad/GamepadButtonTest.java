@@ -1,17 +1,17 @@
 package com.seattlesolvers.solverslib.gamepad;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import com.seattlesolvers.solverslib.command.CommandScheduler;
 import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.function.BooleanSupplier;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GamepadButtonTest {
 
@@ -19,7 +19,7 @@ public class GamepadButtonTest {
     private Gamepad myGamepad;
     private GamepadEx gamepadEx;
 
-    @BeforeEach
+    @Before
     public void setup() {
         myGamepad = new Gamepad();
         gamepadEx = new GamepadEx(myGamepad);
