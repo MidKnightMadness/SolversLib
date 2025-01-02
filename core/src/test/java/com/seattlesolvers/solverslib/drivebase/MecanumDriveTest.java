@@ -1,13 +1,12 @@
 package com.seattlesolvers.solverslib.drivebase;
 
+import static org.junit.Assert.assertArrayEquals;
+
 import com.seattlesolvers.solverslib.geometry.Vector2d;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import org.junit.Test;
 
 public class MecanumDriveTest {
-
     public double[] driveFieldCentric(double strafeSpeed, double forwardSpeed,
                                       double turnSpeed, double gyroAngle) {
         strafeSpeed = clipRange(strafeSpeed);

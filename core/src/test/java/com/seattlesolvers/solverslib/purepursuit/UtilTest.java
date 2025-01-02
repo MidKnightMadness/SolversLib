@@ -1,13 +1,13 @@
 package com.seattlesolvers.solverslib.purepursuit;
 
+import static org.junit.Assert.assertArrayEquals;
+
 import com.seattlesolvers.solverslib.purepursuit.waypoints.EndWaypoint;
 import com.seattlesolvers.solverslib.purepursuit.waypoints.GeneralWaypoint;
 import com.seattlesolvers.solverslib.purepursuit.waypoints.PointTurnWaypoint;
 import com.seattlesolvers.solverslib.purepursuit.waypoints.StartWaypoint;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import org.junit.Test;
 
 public class UtilTest {
 
