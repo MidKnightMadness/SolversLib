@@ -12,8 +12,3 @@ includeBuild("../core") {
 		substitute(module("org.solverslib:core")).using(project(":"))
 	}
 }
-includeBuild("../vision") {
-	dependencySubstitution {
-		substitute(module("org.solverslib:vision")).using(project(":"))
-	}
-}

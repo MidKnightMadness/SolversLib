@@ -10,5 +10,4 @@ ftc {
 
 dependencies {
     implementation("org.solverslib:core")
-    implementation("org.solverslib:vision")
 }
