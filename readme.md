@@ -1,12 +1,9 @@
-<h1><img src='brand/logo/color/FTCLib.svg' height='128px' alt='FTCLib'></h1>
+# SolversLib
 
-*Logo produced by Xing from FTC Team 15303*
+An updated and maintained fork of FTCLib
 
-![Android CI | dev](https://github.com/FTCLib/FTCLib/workflows/Android%20CI/badge.svg?branch=dev)
-
-Origin: https://github.com/FTCLib/FTCLib
-
-Project led by Jackson Isenberg and the Alpharetta Robotics Club
+Project led by FTC 23511, Seattle Solvers. 
+Head maintainer: [Arush](https://github.com/ArushYadlapati)
 
 - - -
 
