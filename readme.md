@@ -14,9 +14,9 @@ Javadocs for SolversLib are available at <https://repo.dairy.foundation/javadoc/
 
 FTCLib documentation (has information about how to use FTCLib, and does not have any information about SolversLib) - <https://docs.ftclib.org/ftclib>
 
+Please note that the vision part of FTCLib has been removed in SolversLib, as it is severly outdated. If you want vision, please use EasyOpenCV (which is built into the SDK).
+
 ## Installing SolversLib
-
-
 
 1. Open up your FTC SDK Project in Android Studio.
 
