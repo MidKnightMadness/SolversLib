@@ -8,11 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Supplier;
 
 /**
@@ -26,9 +23,8 @@ import java.util.function.Supplier;
  *
  * @author Suchir Ryali - X BOTS 19448
  */
-public class DeferredCommand implements Command {
+public class DeferredCommand extends CommandBase {
     private final Supplier<Command> supplier;
-    private final Set<Subsystem> requirements;
     @Nullable
     private Command command;
 
@@ -45,10 +41,9 @@ public class DeferredCommand implements Command {
      */
     public DeferredCommand(@NonNull Supplier<Command> supplier, @Nullable List<Subsystem> requirements) {
         this.supplier = Objects.requireNonNull(supplier);
-        // Using List argument for Java 8 compat.
-        this.requirements = requirements != null
-                ? Collections.unmodifiableSet(new HashSet<>(requirements))
-                : Collections.emptySet();
+        // Using List argument instead of Set for Java 8 compat.
+        if (requirements != null)
+            m_requirements.addAll(requirements);
     }
 
     @Override
@@ -71,11 +66,6 @@ public class DeferredCommand implements Command {
     @Override
     public boolean isFinished() {
         return command == null || command.isFinished();
-    }
-
-    @Override
-    public Set<Subsystem> getRequirements() {
-        return requirements;
     }
 
     @Override
