@@ -2,18 +2,21 @@
 
 An updated and maintained fork of FTCLib
 
-Project led by FTC 23511, Seattle Solvers. 
+Project led by FTC 23511, Seattle Solvers.
+
 Head maintainer: [Arush](https://github.com/ArushYadlapati)
 
-- - -
+---
+## Resources
+You can find the latest version number (and the implementation details) at the [Dairy Foundation](https://repo.dairy.foundation/#/releases/org/solverslib/core), where SolversLib is hosted.
 
-FTCLib is a library designed to be the only library you'll need for FTC programming. The project was initially meant to be a port of WPILib, which is the standard programming library for FRC that almost all teams use. However, with FTC, there are a ton of libraries that not many people have heard about, especially rookie teams who are just starting. The goal of FTCLib is to improve the initial programming experience for new members as well as greatly enhance the efficiency of code for veterans.
+Javadocs for SolversLib are available at <https://repo.dairy.foundation/javadoc/releases/org/solverslib/core/x.y.z>, where x.y.z is the desired version number.
 
-Please read the documentation and the rest of the README before you get started with the library.
+FTCLib documentation (has information about how to use FTCLib, and does not have any information about SolversLib) - <https://docs.ftclib.org/ftclib>
 
-FTCLib documentation - <https://ftclib.gitbook.io/ftclib>
+## Installing SolversLib
 
-## Installation
+
 
 1. Open up your FTC SDK Project in Android Studio.
 
@@ -35,11 +38,14 @@ FTCLib documentation - <https://ftclib.gitbook.io/ftclib>
 
     ```groovy
     dependencies {
-        implementation 'org.ftclib.ftclib:core:2.1.1'
-        // the following is optional if you want vision
-        implementation 'org.ftclib.ftclib:vision:2.1.0'
+        implementation "org.solverslib:core:0.1.0"
+        // the vision part of ftclib is no longer in solverslib, as it is extremely old
+        // please use EasyOpenCV instead
     }
     ```
+
+You can find the latest version number at the [Dairy Foundation](https://repo.dairy.foundation/#/releases/org/solverslib/core), where SolversLib is hosted.
+
 6. Because FTCLib makes use of advanced features, you need to increase the minSdkVersion to 24. Unfortunately, this means that ZTE Speed Phones are not supported in this release.
 
 In build.common.gradle, change the minSdkVersion from 23 to 24:
@@ -87,21 +93,6 @@ add `multiDexEnabled true` to the below location inside the `build.common.gradle
         multiDexEnabled true
     }
 ```
-
-## Welcome to FTCLib!
-
-Thank you for using the FTCLib library for your code! All of the people who worked on it have put a lot of effort into making FTCLib an amazing library. We thank you for putting our effort to work with your own projects. We hope you have great luck and success with your programming.
-
-The mission of FTCLib is briefly summarized in the following quote made by Jackson from ARC Robotics, who started the library.
-
-
-> Our goal is to make programming easier and more efficient through effective classes and detailed examples of implementation.
-
-## Why Use FTCLib?
-
-FTCLib is a non-profit, open source, community-driven library created solely with the intent of helping rookie teams learn programming easier and maximizing efficiency for veteran teams. By putting everything into one library, with enough documentation to build a rigorous learning experience, all teams can benefit from using FTCLib. It's fast, easy, efficient, and powerful. The idea is that this truly is the last library you will ever need.
-
-FTCLib still has the ability to be used along with other libraries without conflict. If you still want to use other libraries alongside ours, go ahead. FTCLib's purpose is solely to improve everyone's programming experience in FTC.
 
 ## Contributing
 
