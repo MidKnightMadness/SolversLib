@@ -45,6 +45,9 @@ Please note that the vision part of FTCLib has been removed in SolversLib, as it
     ```
 
 You can find the latest version number at the [Dairy Foundation](https://repo.dairy.foundation/#/releases/org/solverslib/core), where SolversLib is hosted.
+Alternatively, you can find it using the number below (which is the latest [tag](https://github.com/FTC-23511/SolversLib/tags)):
+![Latest SolversLib Version](https://img.shields.io/github/tag/FTC-23511/SolversLib?label=version&color=blue
+)
 
 6. Because FTCLib makes use of advanced features, you need to increase the minSdkVersion to 24. Unfortunately, this means that ZTE Speed Phones are not supported in this release.
 
