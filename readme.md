@@ -4,9 +4,8 @@
 
 ![Android CI | dev](https://github.com/FTCLib/FTCLib/workflows/Android%20CI/badge.svg?branch=dev)
 
-Origin: https://github.com/FTCLib/FTCLib
-
-Project led by Jackson Isenberg and the Alpharetta Robotics Club
+Project led by FTC 23511, Seattle Solvers. 
+Head maintainer: [Arush](https://github.com/ArushYadlapati)
 
 - - -
 
