@@ -1,8 +1,6 @@
-<h1><img src='brand/logo/color/FTCLib.svg' height='128px' alt='FTCLib'></h1>
+# SolversLib
 
-*Logo produced by Xing from FTC Team 15303*
-
-![Android CI | dev](https://github.com/FTCLib/FTCLib/workflows/Android%20CI/badge.svg?branch=dev)
+An updated and maintained fork of FTCLib
 
 Project led by FTC 23511, Seattle Solvers. 
 Head maintainer: [Arush](https://github.com/ArushYadlapati)
