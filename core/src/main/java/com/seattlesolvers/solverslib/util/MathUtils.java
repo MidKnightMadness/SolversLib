@@ -7,6 +7,9 @@
 
 package com.seattlesolvers.solverslib.util;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public final class MathUtils {
     private MathUtils() {
         throw new AssertionError("utility class");
@@ -32,5 +35,16 @@ public final class MathUtils {
      */
     public static double clamp(double value, double low, double high) {
         return Math.max(low, Math.min(value, high));
+    }
+
+    /**
+     * Returns value rounded to specified places
+     *
+     * @param number Number to round
+     * @param places The number of decimal places to round to
+     */
+
+    public static double round(double number, int places) {
+        return new BigDecimal((String.valueOf(number))).setScale(places, RoundingMode.HALF_UP).doubleValue();
     }
 }
