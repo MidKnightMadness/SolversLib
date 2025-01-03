@@ -3,8 +3,8 @@ package com.seattlesolvers.solverslib.command;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.arcrobotics.ftclib.command.Command;
-import com.arcrobotics.ftclib.command.Subsystem;
+import com.seattlesolvers.solverslib.command.Command;
+import com.seattlesolvers.solverslib.command.Subsystem;
 
 import java.util.Collections;
 import java.util.Objects;
