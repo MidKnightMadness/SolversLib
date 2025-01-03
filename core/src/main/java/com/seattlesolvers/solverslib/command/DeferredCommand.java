@@ -64,3 +64,4 @@ public class DeferredCommand implements Command {
             command.end(interrupted);
         command = null;
     }
+}
