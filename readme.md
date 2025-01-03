@@ -10,7 +10,7 @@ Head maintainer: [Arush](https://github.com/ArushYadlapati)
 ## Resources
 You can find the latest version number (and the implementation details) at the [Dairy Foundation](https://repo.dairy.foundation/#/releases/org/solverslib/core), where SolversLib is hosted.
 
-Javadocs for SolversLib are available at <https://repo.dairy.foundation/javadoc/releases/org/solverslib/core/x.y.z>, where x.y.z is the desired version number.
+Javadocs for SolversLib are available at <https://repo.dairy.foundation/javadoc/releases/org/solverslib/core/latest>, but you can replace `latest` with the desired version number.
 
 FTCLib documentation (has information about how to use FTCLib, and does not have any information about SolversLib) - <https://docs.ftclib.org/ftclib>
 
