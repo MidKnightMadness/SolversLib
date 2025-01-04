@@ -22,9 +22,10 @@ public class GamepadEx {
 
     private final Button[] buttons = {
             Button.Y, Button.X, Button.A, Button.B, Button.LEFT_BUMPER, Button.RIGHT_BUMPER, Button.BACK,
-            Button.START, Button.DPAD_UP, Button.DPAD_DOWN, Button.DPAD_LEFT, Button.DPAD_RIGHT,
+            Button.START, Button.OPTIONS, Button.DPAD_UP, Button.DPAD_DOWN, Button.DPAD_LEFT, Button.DPAD_RIGHT,
             Button.LEFT_STICK_BUTTON, Button.RIGHT_STICK_BUTTON,
-            Button.TRIANGLE, Button.SQUARE, Button.CROSS, Button.CIRCLE
+            Button.TRIANGLE, Button.SQUARE, Button.CROSS, Button.CIRCLE,
+            Button.PS, Button.SHARE, Button.TOUCHPAD
     };
 
     /**
@@ -90,11 +91,23 @@ public class GamepadEx {
             case START:
                 buttonValue = gamepad.start;
                 break;
+            case OPTIONS:
+                buttonValue = gamepad.options;
+                break;
             case LEFT_STICK_BUTTON:
                 buttonValue = gamepad.left_stick_button;
                 break;
             case RIGHT_STICK_BUTTON:
                 buttonValue = gamepad.right_stick_button;
+                break;
+            case PS:
+                buttonValue = gamepad.ps;
+                break;
+            case SHARE:
+                buttonValue = gamepad.share;
+                break;
+            case TOUCHPAD:
+                buttonValue = gamepad.touchpad;
                 break;
             default:
                 buttonValue = false;
