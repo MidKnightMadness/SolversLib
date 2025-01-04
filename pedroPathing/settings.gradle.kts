@@ -7,11 +7,8 @@ pluginManagement {
 	}
 }
 
-includeBuild("../SolversLib/core") {
+includeBuild("../core") {
 	dependencySubstitution {
 		substitute(module("org.solverslib:core")).using(project(":"))
 	}
 }
-
-includeBuild("examples")
-includeBuild("pedroPathing")
