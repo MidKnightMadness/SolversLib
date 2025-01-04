@@ -23,7 +23,8 @@ public class GamepadEx {
     private final Button[] buttons = {
             Button.Y, Button.X, Button.A, Button.B, Button.LEFT_BUMPER, Button.RIGHT_BUMPER, Button.BACK,
             Button.START, Button.DPAD_UP, Button.DPAD_DOWN, Button.DPAD_LEFT, Button.DPAD_RIGHT,
-            Button.LEFT_STICK_BUTTON, Button.RIGHT_STICK_BUTTON
+            Button.LEFT_STICK_BUTTON, Button.RIGHT_STICK_BUTTON,
+            Button.TRIANGLE, Button.SQUARE, Button.CROSS, Button.CIRCLE
     };
 
     /**
@@ -50,14 +51,18 @@ public class GamepadEx {
         boolean buttonValue = false;
         switch (button) {
             case A:
+            case CROSS:
                 buttonValue = gamepad.a;
                 break;
             case B:
+            case CIRCLE:
                 buttonValue = gamepad.b;
                 break;
+            case SQUARE:
             case X:
                 buttonValue = gamepad.x;
                 break;
+            case TRIANGLE:
             case Y:
                 buttonValue = gamepad.y;
                 break;
