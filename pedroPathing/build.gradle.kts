@@ -25,9 +25,12 @@ dependencies {
     api("com.pedropathing:pedro:1.0.4")
     implementation(project(":"));
 
-    afterEvaluate {
-        api("org.solverslib:core:$version")
-    }
+//    afterEvaluate {
+//        api("org.solverslib:core:$version")
+//    }
+
+
+    implementation("org.solverslib:core:$version")
 }
 
 repositories {
