@@ -12,7 +12,7 @@ import com.pedropathing.pathgen.Path;
  * holdEnd is set to true by default, so you only need to give it your instance of follower and the Path to follow.
  * To run a PathChain instead of a Path, go to {@link FollowPathChainCommand}.
  * <p>
- * To see an example usage of both FollowPathCommand and FollowPathChainCommand, look at @see <a href="https://github.com/FTC-23511/SolversLib/blob/master/examples/src/main/java/org/firstinspires/ftc/teamcode/FollowPedroSample.java">https://github.com/FTC-23511/SolversLib/blob/master/examples/src/main/java/org/firstinspires/ftc/teamcode/FollowPedroSample.java</a>
+ * To see an example usage of both FollowPathCommand and FollowPathChainCommand, look at <a href="https://github.com/FTC-23511/SolversLib/blob/master/examples/src/main/java/org/firstinspires/ftc/teamcode/FollowPedroSample.java">https://github.com/FTC-23511/SolversLib/blob/master/examples/src/main/java/org/firstinspires/ftc/teamcode/FollowPedroSample.java</a>
  *
  * @author Arush - FTC 23511
  * @author Saket - FTC 23511
