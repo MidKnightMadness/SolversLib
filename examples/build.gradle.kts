@@ -10,4 +10,12 @@ ftc {
 
 dependencies {
     implementation("org.solverslib:core")
+    implementation("org.solverslib:pedroPathing")
+
+    api("com.pedropathing:pedro:1.0.4")
+}
+
+repositories {
+    maven("https://maven.brott.dev/")
+    maven("https://maven.pedropathing.com/")
 }
