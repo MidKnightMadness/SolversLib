@@ -25,7 +25,7 @@ public class GamepadEx {
             Button.START, Button.OPTIONS, Button.DPAD_UP, Button.DPAD_DOWN, Button.DPAD_LEFT, Button.DPAD_RIGHT,
             Button.LEFT_STICK_BUTTON, Button.RIGHT_STICK_BUTTON,
             Button.TRIANGLE, Button.SQUARE, Button.CROSS, Button.CIRCLE,
-            Button.PS, Button.SHARE, Button.TOUCHPAD
+            Button.PS, Button.SHARE, Button.TOUCHPAD, Button.TOUCHPAD_FINGER_1, Button.TOUCHPAD_FINGER_2
     };
 
     /**
@@ -108,6 +108,12 @@ public class GamepadEx {
                 break;
             case TOUCHPAD:
                 buttonValue = gamepad.touchpad;
+                break;
+            case TOUCHPAD_FINGER_1:
+                buttonValue = gamepad.touchpad_finger_1;
+                break;
+            case TOUCHPAD_FINGER_2:
+                buttonValue = gamepad.touchpad_finger_2;
                 break;
             default:
                 buttonValue = false;
