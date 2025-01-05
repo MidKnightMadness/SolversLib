@@ -22,8 +22,10 @@ public class GamepadEx {
 
     private final Button[] buttons = {
             Button.Y, Button.X, Button.A, Button.B, Button.LEFT_BUMPER, Button.RIGHT_BUMPER, Button.BACK,
-            Button.START, Button.DPAD_UP, Button.DPAD_DOWN, Button.DPAD_LEFT, Button.DPAD_RIGHT,
-            Button.LEFT_STICK_BUTTON, Button.RIGHT_STICK_BUTTON
+            Button.START, Button.OPTIONS, Button.DPAD_UP, Button.DPAD_DOWN, Button.DPAD_LEFT, Button.DPAD_RIGHT,
+            Button.LEFT_STICK_BUTTON, Button.RIGHT_STICK_BUTTON,
+            Button.TRIANGLE, Button.SQUARE, Button.CROSS, Button.CIRCLE,
+            Button.PS, Button.SHARE, Button.TOUCHPAD, Button.TOUCHPAD_FINGER_1, Button.TOUCHPAD_FINGER_2
     };
 
     /**
@@ -50,14 +52,18 @@ public class GamepadEx {
         boolean buttonValue = false;
         switch (button) {
             case A:
+            case CROSS:
                 buttonValue = gamepad.a;
                 break;
             case B:
+            case CIRCLE:
                 buttonValue = gamepad.b;
                 break;
+            case SQUARE:
             case X:
                 buttonValue = gamepad.x;
                 break;
+            case TRIANGLE:
             case Y:
                 buttonValue = gamepad.y;
                 break;
@@ -85,11 +91,29 @@ public class GamepadEx {
             case START:
                 buttonValue = gamepad.start;
                 break;
+            case OPTIONS:
+                buttonValue = gamepad.options;
+                break;
             case LEFT_STICK_BUTTON:
                 buttonValue = gamepad.left_stick_button;
                 break;
             case RIGHT_STICK_BUTTON:
                 buttonValue = gamepad.right_stick_button;
+                break;
+            case PS:
+                buttonValue = gamepad.ps;
+                break;
+            case SHARE:
+                buttonValue = gamepad.share;
+                break;
+            case TOUCHPAD:
+                buttonValue = gamepad.touchpad;
+                break;
+            case TOUCHPAD_FINGER_1:
+                buttonValue = gamepad.touchpad_finger_1;
+                break;
+            case TOUCHPAD_FINGER_2:
+                buttonValue = gamepad.touchpad_finger_2;
                 break;
             default:
                 buttonValue = false;
