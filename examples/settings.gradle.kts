@@ -12,3 +12,9 @@ includeBuild("../core") {
 		substitute(module("org.solverslib:core")).using(project(":"))
 	}
 }
+
+includeBuild("../pedroPathing") {
+	dependencySubstitution {
+		substitute(module("org.solverslib:pedroPathing")).using(project(":"))
+	}
+}
