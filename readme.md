@@ -10,7 +10,12 @@ Head maintainer: [Arush](https://github.com/ArushYadlapati)
 ## Resources
 You can find the latest version number (and the implementation details) at the [Dairy Foundation](https://repo.dairy.foundation/#/releases/org/solverslib/core), where SolversLib is hosted.
 
-Javadocs for SolversLib are available at <https://repo.dairy.foundation/javadoc/releases/org/solverslib/core/latest>, but you can replace `latest` with the desired version number.
+Javadocs for SolversLib Core (standard FTCLib, has Command Base, Hardware, Gamepads, etc.) are available at <https://repo.dairy.foundation/javadoc/releases/org/solverslib/core/latest>, but you can replace `latest` with the desired version number.
+
+
+Javadocs for SolversLib Pedro Pathing (Pedro Pathing support in FTCLib) are available at <https://repo.dairy.foundation/javadoc/releases/org/solverslib/pedroPathing/latest>, but you can replace `latest` with the desired version number.
+
+The best documentation for SolverSlib is the Javadocs, especially for the Pedro Pathing support.
 
 FTCLib documentation (has information about how to use FTCLib, and does not have any information about SolversLib) - <https://docs.ftclib.org/ftclib>
 
@@ -38,9 +43,11 @@ Please note that the vision part of FTCLib has been removed in SolversLib, as it
 
     ```groovy
     dependencies {
-        implementation "org.solverslib:core:0.1.0"
+        implementation "org.solverslib:core:0.2.0"
         // the vision part of ftclib is no longer in solverslib, as it is extremely old
         // please use EasyOpenCV instead
+
+        implementation "org.solverslib:pedroPathing:0.2.0" // only for pedro pathing users (you still need the actual pedro pathing library installed for this)
     }
     ```
 
@@ -49,6 +56,8 @@ Alternatively, you can find it using the number below (which is the latest [tag]
 
 ![Latest SolversLib Version](https://img.shields.io/github/tag/FTC-23511/SolversLib?label=version&color=blue
 )
+
+Both the `core` and `pedroPathing` modules use the same version.
 
 6. Because FTCLib makes use of advanced features, you need to increase the minSdkVersion to 24. Unfortunately, this means that ZTE Speed Phones are not supported in this release.
 
