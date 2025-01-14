@@ -15,7 +15,7 @@ Javadocs for SolversLib Core (standard FTCLib, has Command Base, Hardware, Gamep
 
 Javadocs for SolversLib Pedro Pathing (Pedro Pathing support in FTCLib) are available at <https://repo.dairy.foundation/javadoc/releases/org/solverslib/pedroPathing/latest>, but you can replace `latest` with the desired version number.
 
-The best documentation for SolverSlib is the Javadocs, especially for the Pedro Pathing support.
+The best documentation for SolversLib is the Javadocs, especially for the Pedro Pathing support.
 
 FTCLib documentation (has information about how to use FTCLib, and does not have any information about SolversLib) - <https://docs.ftclib.org/ftclib>
 
