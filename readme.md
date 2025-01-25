@@ -43,7 +43,7 @@ Please note that the vision part of FTCLib has been removed in SolversLib, as it
 
     ```groovy
     dependencies {
-        implementation "org.solverslib:core:0.2.0"
+        implementation "org.solverslib:core:0.2.1"
         // the vision part of ftclib is no longer in solverslib, as it is extremely old
         // please use EasyOpenCV instead
 
@@ -52,9 +52,8 @@ Please note that the vision part of FTCLib has been removed in SolversLib, as it
     ```
 
 You can find the latest version number at the [Dairy Foundation](https://repo.dairy.foundation/#/releases/org/solverslib/core), where SolversLib is hosted.
-Alternatively, you can find it using the number below (which is the latest [tag](https://github.com/FTC-23511/SolversLib/tags)):
+Alternatively, you can look at the latest [tag](https://github.com/FTC-23511/SolversLib/tags):
 
-![Latest SolversLib Version](https://img.shields.io/github/tag/FTC-23511/SolversLib?label=version&color=blue
 )
 
 Both the `core` and `pedroPathing` modules use the same version.
