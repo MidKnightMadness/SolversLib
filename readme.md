@@ -47,7 +47,8 @@ Please note that the vision part of FTCLib has been removed in SolversLib, as it
         // the vision part of ftclib is no longer in solverslib, as it is extremely old
         // please use EasyOpenCV instead
 
-        implementation "org.solverslib:pedroPathing:0.2.0" // only for pedro pathing users (you still need the actual pedro pathing library installed for this)
+        // Only for pedro pathing users (you still need the actual pedro pathing library installed for this):
+        implementation "org.solverslib:pedroPathing:0.2.1"
     }
     ```
 
