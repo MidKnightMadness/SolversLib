@@ -122,7 +122,10 @@ public interface Command {
     }
 
     /**
-     * Decorates this command with a runnable to run before this command starts.
+     * Decorates this command with another command to run before this command starts.
+     * <p>Note: Initially, beforeStarting took a Runnable to run that was inside of an {@link InstantCommand},
+     * so if you used this previously you need to supply the InstantCommand yourself. This was done so you no
+     * longer have to always wrap commands inside of an InstantCommand.
      *
      * <p>Note: This decorator works by composing this command within a CommandGroup.  The command
      * cannot be used independently after being decorated, or be re-decorated with a different
@@ -130,11 +133,11 @@ public interface Command {
      * {@link CommandGroupBase#clearGroupedCommand(Command)}.  The decorated command can, however, be
      * further decorated without issue.
      *
-     * @param toRun the Runnable to run
+     * @param command the Command to run
      * @return the decorated command
      */
-    default Command beforeStarting(Runnable toRun) {
-        return new SequentialCommandGroup(new InstantCommand(toRun), this);
+    default Command beforeStarting(Command command) {
+        return new SequentialCommandGroup(command, this);
     }
 
     /**
