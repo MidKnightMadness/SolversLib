@@ -53,9 +53,7 @@ Please note that the vision part of FTCLib has been removed in SolversLib, as it
     ```
 
 You can find the latest version number at the [Dairy Foundation](https://repo.dairy.foundation/#/releases/org/solverslib/core), where SolversLib is hosted.
-Alternatively, you can look at the latest [tag](https://github.com/FTC-23511/SolversLib/tags):
-
-)
+Alternatively, you can look at the latest [tag](https://github.com/FTC-23511/SolversLib/tags).
 
 Both the `core` and `pedroPathing` modules use the same version.
 
