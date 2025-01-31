@@ -1,5 +1,7 @@
 package com.seattlesolvers.solverslib.command;
 
+import android.util.Log;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /**
@@ -45,12 +47,17 @@ public abstract class CommandOpMode extends LinearOpMode {
         waitForStart();
 
         // run the scheduler
-        while (!isStopRequested() && opModeIsActive()) {
-            run();
+        try {
+            while (!isStopRequested() && opModeIsActive()) {
+                run();
+            }
+        } finally {
+            try {
+                end();
+            } finally {
+                reset();
+            }
         }
-
-        end();
-        reset();
     }
 
     public abstract void initialize();
