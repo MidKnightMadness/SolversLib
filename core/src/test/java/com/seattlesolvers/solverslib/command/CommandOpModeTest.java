@@ -7,6 +7,7 @@ import org.junit.Test;
 public class CommandOpModeTest extends CommandOpMode {
 
     public static int x = 3;
+    public static int x1 = 3;
 
     @Override
     public void initialize() {
@@ -18,6 +19,13 @@ public class CommandOpModeTest extends CommandOpMode {
                 x = 5;
             }
         });
+    }
+
+    @Override
+    public void end() {
+        if (x == 5) {
+            x1 = x;
+        }
     }
 
     @Test

@@ -48,10 +48,18 @@ public abstract class CommandOpMode extends LinearOpMode {
         while (!isStopRequested() && opModeIsActive()) {
             run();
         }
+
+        end();
         reset();
     }
 
     public abstract void initialize();
+
+    /**
+     * Runs at the end (when opMode is no longer active) of CommandOpMode
+     */
+
+    public void end() { }
 
     public static void disable() {
         Robot.disable();
