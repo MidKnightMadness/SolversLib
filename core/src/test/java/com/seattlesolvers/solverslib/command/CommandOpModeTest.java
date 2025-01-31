@@ -33,6 +33,7 @@ public class CommandOpModeTest extends CommandOpMode {
         initialize();
         run();
         assertEquals(5, x);
+        assertEquals(x1, x);
         reset();
     }
 }
