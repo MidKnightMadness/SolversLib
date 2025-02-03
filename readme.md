@@ -40,22 +40,18 @@ Please note that the vision part of FTCLib has been removed in SolversLib, as it
     ![TeamCodeGradle](https://github.com/OpenFTC/EasyOpenCV/blob/master/doc/images/teamcode-gradle.png)
     
 5. Go to the bottom of the file, and add the following.
-
+- Latest `core` version: [https://repo.dairy.foundation/#/releases/org/solverslib/core](https://repo.dairy.foundation/#/releases/org/solverslib/core)
+- Latest `pedroPathing` version: [https://repo.dairy.foundation/#/releases/org/solverslib/pedroPathing](https://repo.dairy.foundation/#/releases/org/solverslib/pedroPathing)
     ```groovy
     dependencies {
-        implementation "org.solverslib:core:0.2.1"
+        implementation "org.solverslib:core:0.2.2"
         // the vision part of ftclib is no longer in solverslib, as it is extremely old
         // please use EasyOpenCV instead
 
-        // Only for pedro pathing users (you still need the actual pedro pathing library installed for this):
-        implementation "org.solverslib:pedroPathing:0.2.1"
+        // Only for pedro pathing users (you still need the actual Pedro Pathing library installed for this):
+        implementation "org.solverslib:pedroPathing:0.2.3"
     }
     ```
-
-You can find the latest version number at the [Dairy Foundation](https://repo.dairy.foundation/#/releases/org/solverslib/core), where SolversLib is hosted.
-Alternatively, you can look at the latest [tag](https://github.com/FTC-23511/SolversLib/tags).
-
-Both the `core` and `pedroPathing` modules use the same version.
 
 6. Because FTCLib makes use of advanced features, you need to increase the minSdkVersion to 24. Unfortunately, this means that ZTE Speed Phones are not supported in this release.
 
