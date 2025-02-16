@@ -45,6 +45,25 @@ public class SolversMotor {
     public double getPower() {
         return lastPower;
     }
+    public boolean isBusy() {
+        return this.motor.isBusy();
+    }
+
+    public boolean getPowerFloat() {
+        return this.motor.getPowerFloat();
+    }
+
+    public DcMotor.ZeroPowerBehavior getZeroPowerBehavior() {
+        return this.motor.getZeroPowerBehavior();
+    }
+
+    public DcMotor.RunMode getMode() {
+        return this.motor.getMode();
+    }
+
+    public int getPortNumber() {
+        return this.motor.getPortNumber();
+    }
 
     public void setMode(DcMotor.RunMode runMode) {
         this.motor.setMode(runMode);
