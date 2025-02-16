@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PwmControl;
+import com.qualcomm.robotcore.hardware.ServoController;
 import com.qualcomm.robotcore.hardware.ServoControllerEx;
 import com.qualcomm.robotcore.util.Range;
 
@@ -86,5 +87,13 @@ public class SolversAxonServo {
 
     public double getPower() {
         return lastPower;
+    }
+
+    public ServoController getController() {
+        return this.crservo.getController();
+    }
+
+    public int getPortNumber() {
+        return this.crservo.getPortNumber();
     }
 }

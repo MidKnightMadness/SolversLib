@@ -3,6 +3,7 @@ package com.seattlesolvers.solverslib.solversHardware;
 import static com.seattlesolvers.solverslib.util.MathUtils.round;
 
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.ServoController;
 
 /**
  * A wrapper servo class that provides caching to avoid unnecessary setPosition() calls.
@@ -25,6 +26,10 @@ public class SolversServo {
         servo.setDirection(direction);
     }
 
+    public Servo.Direction getDirection() {
+        return this.servo.getDirection();
+    }
+
     public void setPosition(double pos) {
         if (Math.abs(this.lastPos - pos) > this.posThreshold) {
             lastPos = pos;
@@ -38,5 +43,17 @@ public class SolversServo {
 
     public double getPosition(int places) {
         return round(lastPos, places);
+    }
+
+    public ServoController getController() {
+        return this.servo.getController();
+    }
+
+    public int getPortNumber() {
+        return this.servo.getPortNumber();
+    }
+
+    public void scaleRange(double min, double max) {
+        this.servo.scaleRange(min, max);
     }
 }
