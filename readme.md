@@ -9,6 +9,7 @@ Head maintainer: [Arush](https://github.com/ArushYadlapati)
 ---
 ## Resources
 You can find the latest version number (and the implementation details) at the [Dairy Foundation](https://repo.dairy.foundation/#/releases/org/solverslib/core), where SolversLib is hosted.
+The version number is always the same for both Core and pedroPathing are always the same.
 
 Javadocs for SolversLib Core (standard FTCLib, has Command Base, Hardware, Gamepads, etc.) are available at <https://repo.dairy.foundation/javadoc/releases/org/solverslib/core/latest>, but you can replace `latest` with the desired version number.
 
@@ -44,12 +45,14 @@ Please note that the vision part of FTCLib has been removed in SolversLib, as it
 - Latest `pedroPathing` version: [https://repo.dairy.foundation/#/releases/org/solverslib/pedroPathing](https://repo.dairy.foundation/#/releases/org/solverslib/pedroPathing)
     ```groovy
     dependencies {
-        implementation "org.solverslib:core:0.2.2"
+        implementation "org.solverslib:core:0.2.3"
         // the vision part of ftclib is no longer in solverslib, as it is extremely old
         // please use EasyOpenCV instead
 
         // Only for pedro pathing users (you still need the actual Pedro Pathing library installed for this):
         implementation "org.solverslib:pedroPathing:0.2.3"
+
+        // The version number is always the same for both Core and pedroPathing are always the same.
     }
     ```
 
