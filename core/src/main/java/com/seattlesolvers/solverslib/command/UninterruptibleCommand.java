@@ -4,7 +4,7 @@ package com.seattlesolvers.solverslib.command;
  * Schedules a Command as uninterruptible
  * @author Arush - FTC 23511
  */
-public class UninterruptibleCommand extends CommandBase {
+    public class UninterruptibleCommand extends CommandBase {
     private final Command command;
 
     /**
