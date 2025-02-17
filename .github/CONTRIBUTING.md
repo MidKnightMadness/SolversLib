@@ -1,7 +1,11 @@
 # Contributing
-Welcome to the FTCLib project! We hope we have something useful for you!
+Welcome to the SolversLib project! We hope we have something useful for you!
 
-## Project Developers
+## Current (SolversLib) Project Developers
+
+- [Arush](https://github.com/ArushYadlapati) from Seattle Solvers
+
+## Previous (FTCLib) Project Developers
 
 - [Jackson](https://github.com/jiceberg) from ARC Robotics
 - [Pranav](https://github.com/pranavavva) from TecHounds
