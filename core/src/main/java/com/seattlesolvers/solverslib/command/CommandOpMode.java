@@ -44,10 +44,11 @@ public abstract class CommandOpMode extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         initialize();
 
-        waitForStart();
-
         // run the scheduler
         try {
+            while (opModeInInit()) {
+                initialize_loop();
+            }
             while (!isStopRequested() && opModeIsActive()) {
                 run();
             }
@@ -67,6 +68,8 @@ public abstract class CommandOpMode extends LinearOpMode {
      */
 
     public void end() { }
+    
+    public void initialize_loop() { }
 
     public static void disable() {
         Robot.disable();
@@ -75,6 +78,4 @@ public abstract class CommandOpMode extends LinearOpMode {
     public static void enable() {
         Robot.enable();
     }
-
-
 }
