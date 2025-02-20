@@ -10,7 +10,6 @@ import com.pedropathing.pathgen.BezierCurve;
 import com.pedropathing.pathgen.PathChain;
 import com.pedropathing.pathgen.Point;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.seattlesolvers.solverslib.pedroCommand.FollowPathChainCommand;
 import com.seattlesolvers.solverslib.pedroCommand.FollowPathCommand;
 
 @Autonomous
@@ -46,8 +45,8 @@ public class FollowPedroSample extends CommandOpMode {
                 // Updates follower to follow path
                 new RunCommand(() -> follower.update()),
 
-                new FollowPathChainCommand(follower, paths.get(0)),
-                new FollowPathChainCommand(follower, pathChain),
+                new FollowPathCommand(follower, paths.get(0)),
+                new FollowPathCommand(follower, pathChain),
                 new FollowPathCommand(follower, path)
         );
     }

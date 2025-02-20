@@ -8,15 +8,12 @@ import com.pedropathing.pathgen.PathChain;
 // Thanks Powercube from Watt-sUP 16166, we copied verbatim
 
 /**
- * Allows you to run a PathChain by scheduling it.
- * holdEnd is set to true by default, so you only need to give it your instance of follower and the PathChain to follow.
- * To run a Path instead of a PathChain, go to {@link FollowPathCommand}.
+ * Now incorporated into one command, {@link FollowPathCommand)
  * <p>
- * To see an example usage of both FollowPathCommand and FollowPathChainCommand, look at @see <a href="https://github.com/FTC-23511/SolversLib/blob/master/examples/src/main/java/org/firstinspires/ftc/teamcode/FollowPedroSample.java">https://github.com/FTC-23511/SolversLib/blob/master/examples/src/main/java/org/firstinspires/ftc/teamcode/FollowPedroSample.java</a>
- *
  * @author Arush - FTC 23511
  * @author Saket - FTC 23511
  */
+@Deprecated
 public class FollowPathChainCommand extends CommandBase {
 
     private final Follower follower;
