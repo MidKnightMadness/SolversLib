@@ -1,4 +1,4 @@
-package com.seattlesolvers.solverslib.old;
+package com.seattlesolvers.solverslib.pedroCommand.old;
 
 import com.seattlesolvers.solverslib.command.CommandBase;
 import com.pedropathing.follower.Follower;

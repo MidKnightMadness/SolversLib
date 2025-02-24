@@ -3,7 +3,7 @@ package com.seattlesolvers.solverslib.pedroCommand;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.pathgen.Path;
 import com.seattlesolvers.solverslib.command.CommandBase;
-import com.seattlesolvers.solverslib.old.FollowPathChainCommand;
+import com.seattlesolvers.solverslib.pedroCommand.old.FollowPathChainCommand;
 
 
 // Thanks Powercube from Watt-sUP 16166, we copied verbatim
