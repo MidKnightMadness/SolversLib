@@ -4,6 +4,7 @@ import com.seattlesolvers.solverslib.command.CommandBase;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.pathgen.PathChain;
 import com.seattlesolvers.solverslib.pedroCommand.FollowPathCommand;
+import com.seattlesolvers.solverslib.pedroCommand.old.FollowPathChainCommand;
 
 
 // Thanks Powercube from Watt-sUP 16166, we copied verbatim
