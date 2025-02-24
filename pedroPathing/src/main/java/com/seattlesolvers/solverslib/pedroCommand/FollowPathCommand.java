@@ -36,7 +36,7 @@ public class FollowPathCommand extends CommandBase {
 
     public FollowPathCommand(Follower follower, Path path) {
         this.follower = follower;
-        this.path = follower.pathBuilder().addPath(path).build();
+        this.path = new PathChain(path);
     }
 
     public FollowPathCommand(Follower follower, Path path, boolean holdEnd) {
