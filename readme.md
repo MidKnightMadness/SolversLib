@@ -8,6 +8,9 @@ Head maintainer: [Arush](https://github.com/ArushYadlapati)
 
 ---
 ## Resources
+
+Complete Documentation (Highly Reccomended): [https://docs.seattlesolvers.com/](https://docs.seattlesolvers.com/)
+
 You can find the latest version number (and the implementation details) at the [Dairy Foundation](https://repo.dairy.foundation/#/releases/org/solverslib/core), where SolversLib is hosted.
 
 Javadocs for SolversLib Core (standard FTCLib, has Command Base, Hardware, Gamepads, etc.) are available at <https://repo.dairy.foundation/javadoc/releases/org/solverslib/core/latest>, but you can replace `latest` with the desired version number.
@@ -15,7 +18,6 @@ Javadocs for SolversLib Core (standard FTCLib, has Command Base, Hardware, Gamep
 
 Javadocs for SolversLib Pedro Pathing (Pedro Pathing support in FTCLib) are available at <https://repo.dairy.foundation/javadoc/releases/org/solverslib/pedroPathing/latest>, but you can replace `latest` with the desired version number.
 
-The best documentation for SolversLib is the Javadocs, especially for the Pedro Pathing support.
 
 FTCLib documentation (has information about how to use FTCLib, and does not have any information about SolversLib) - <https://docs.ftclib.org/ftclib>
 
