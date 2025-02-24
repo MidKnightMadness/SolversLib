@@ -40,7 +40,7 @@ public class FollowPathChainCommand extends CommandBase {
      * @param holdEnd If the robot should maintain its ending position
      * @return This command for compatibility in command groups
      */
-    public FollowPathChainCommand setHoldEnd(boolean holdEnd) {
+    public com.seattlesolvers.solverslib.old.FollowPathChainCommand setHoldEnd(boolean holdEnd) {
         this.holdEnd = holdEnd;
         return this;
     }

@@ -1,14 +1,15 @@
-package com.seattlesolvers.solverslib.pedroCommand;
+package com.seattlesolvers.solverslib.old;
 
 import com.seattlesolvers.solverslib.command.CommandBase;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.pathgen.PathChain;
+import com.seattlesolvers.solverslib.pedroCommand.FollowPathCommand;
 
 
 // Thanks Powercube from Watt-sUP 16166, we copied verbatim
 
 /**
- * Now incorporated into one command, {@link FollowPathCommand)
+ * Now incorporated into one command, {@link FollowPathCommand )
  * <p>
  * @author Arush - FTC 23511
  * @author Saket - FTC 23511
