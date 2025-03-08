@@ -54,6 +54,5 @@ public class FollowPedroSample extends CommandOpMode {
     @Override
     public void run() {
         super.run();
-
     }
 }
