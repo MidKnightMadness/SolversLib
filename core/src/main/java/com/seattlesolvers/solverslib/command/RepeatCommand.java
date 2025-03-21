@@ -12,6 +12,8 @@ package com.seattlesolvers.solverslib.command;
 import static com.seattlesolvers.solverslib.command.CommandGroupBase.registerGroupedCommands;
 import static com.seattlesolvers.solverslib.command.CommandGroupBase.requireUngrouped;
 
+import java.util.function.BooleanSupplier;
+
 /**
  * A command that runs another command repeatedly, restarting it when it ends, until this command is
  * interrupted. While this class does not extend {@link CommandGroupBase}, it is still considered a
@@ -21,10 +23,14 @@ import static com.seattlesolvers.solverslib.command.CommandGroupBase.requireUngr
  * <p>As a rule, CommandGroups require the union of the requirements of their component commands.
  *
  * @author Ryan
+ * @author Arush (for the overloaded constructors)
  */
 public class RepeatCommand extends CommandBase{
 
     protected final Command m_command;
+    private int timesRepeated;
+    private int maxRepeatTimes;
+    private BooleanSupplier condition;
 
     /**
      * Creates a new RepeatCommand. Will run another command repeatedly, restarting it whenever it
@@ -33,6 +39,43 @@ public class RepeatCommand extends CommandBase{
      * @param command the command to run repeatedly
      */
     public RepeatCommand(Command command) {
+        requireUngrouped(command);
+        registerGroupedCommands(command);
+        m_command = command;
+        m_requirements.addAll(command.getRequirements());
+    }
+
+    /**
+     * Creates a new overloaded RepeatCommand. Will run another command repeatedly, restarting it whenever it
+     * ends, until this command is interrupted or a condition is met.
+     *
+     * @param command the command to run repeatedly
+     * @param condition the condition to end the command
+     */
+    public RepeatCommand(Command command, BooleanSupplier condition) {
+        this.condition = condition;
+
+        requireUngrouped(command);
+        registerGroupedCommands(command);
+        m_command = command;
+        m_requirements.addAll(command.getRequirements());
+    }
+
+    /**
+     * Creates a new overloaded RepeatCommand. Runs another command maxRepeatTimes amount of times, and ends when
+     * it has repeated enough times or if this command is interrupted.
+     *
+     * @param command the command to run repeatedly
+     * @param maxRepeatTimes the number of times to repeat the command (has to be greater than 0)
+     */
+    public RepeatCommand(Command command, int maxRepeatTimes) {
+        this.maxRepeatTimes = maxRepeatTimes;
+        timesRepeated = 0;
+
+        if (maxRepeatTimes <= 0) {
+            throw new IllegalArgumentException("RepeatCommands' maxRepeatTimes cannot be negative or zero!");
+        }
+
         requireUngrouped(command);
         registerGroupedCommands(command);
         m_command = command;
@@ -49,6 +92,9 @@ public class RepeatCommand extends CommandBase{
     @Override
     public void execute() {
         m_command.execute();
+        if (maxRepeatTimes != 0) {
+            timesRepeated++;
+        }
         if (m_command.isFinished()) {
             // restart command
             m_command.end(false);
@@ -58,7 +104,7 @@ public class RepeatCommand extends CommandBase{
 
     @Override
     public boolean isFinished() {
-        return false;
+        return (maxRepeatTimes != 0 && timesRepeated >= maxRepeatTimes) || (condition != null && condition.getAsBoolean());
     }
 
     @Override

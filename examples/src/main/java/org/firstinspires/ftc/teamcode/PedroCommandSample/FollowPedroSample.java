@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.PedroCommandSample;
 
 import java.util.ArrayList;
 
@@ -54,6 +54,5 @@ public class FollowPedroSample extends CommandOpMode {
     @Override
     public void run() {
         super.run();
-
     }
 }
