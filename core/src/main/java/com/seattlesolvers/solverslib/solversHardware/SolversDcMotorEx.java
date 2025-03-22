@@ -1,25 +1,28 @@
 package com.seattlesolvers.solverslib.solversHardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
+
 /**
- * A wrapper motor class that provides caching to avoid unnecessary setPower() calls.
+ * A wrapper DcMotor class that provides caching to avoid unnecessary setPower() calls.
  * Credit to team FTC 22105 (Runtime Terror) for the base class, we just modified it
  */
 
-public class SolversMotor {
+public class SolversDcMotorEx {
     private double lastPower = 0;
-    private final DcMotor motor;
+    private final DcMotorEx motor;
 
     private double powerThreshold = 0.0;
 
-    public SolversMotor(DcMotor motor, double powerThreshold) {
+    public SolversDcMotorEx(DcMotorEx motor, double powerThreshold) {
         this.motor = motor;
         this.powerThreshold = powerThreshold;
     }
 
-    public SolversMotor(DcMotor motor) {
+    public SolversDcMotorEx(DcMotorEx motor) {
         this.motor = motor;
     }
 
@@ -53,11 +56,11 @@ public class SolversMotor {
         return this.motor.getPowerFloat();
     }
 
-    public DcMotor.ZeroPowerBehavior getZeroPowerBehavior() {
+    public DcMotorEx.ZeroPowerBehavior getZeroPowerBehavior() {
         return this.motor.getZeroPowerBehavior();
     }
 
-    public DcMotor.RunMode getMode() {
+    public DcMotorEx.RunMode getMode() {
         return this.motor.getMode();
     }
 
@@ -65,11 +68,27 @@ public class SolversMotor {
         return this.motor.getPortNumber();
     }
 
-    public void setMode(DcMotor.RunMode runMode) {
+    public void setMode(DcMotorEx.RunMode runMode) {
         this.motor.setMode(runMode);
     }
 
-    public void setZeroPowerBehavior(DcMotor.ZeroPowerBehavior zeroPowerBehavior) {
+    public void setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior zeroPowerBehavior) {
         this.motor.setZeroPowerBehavior(zeroPowerBehavior);
+    }
+
+    public double getCurrent(CurrentUnit unit) {
+        return this.motor.getCurrent(unit);
+    }
+
+    public double getCurrentAlert(CurrentUnit unit) {
+        return this.motor.getCurrentAlert(unit);
+    }
+
+    public void setCurrentAlert(double current, CurrentUnit unit) {
+         this.motor.setCurrentAlert(current, unit);
+    }
+
+    public boolean isOverCurrent() {
+        return this.motor.isOverCurrent();
     }
 }
