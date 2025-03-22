@@ -1,6 +1,5 @@
 package com.seattlesolvers.solverslib.solversHardware;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
@@ -34,7 +33,7 @@ public class SolversDcMotorEx {
     }
 
     public int getPosition() {
-        return(motor.getCurrentPosition());
+        return motor.getCurrentPosition();
     }
 
     public void setDirection(DcMotorSimple.Direction direction) {
