@@ -1,4 +1,6 @@
-package com.seattlesolvers.solverslib.controller;
+package com.seattlesolvers.solverslib;
+
+import com.seattlesolvers.solverslib.controller.Controller;
 
 /**
  * This is a PID controller (https://en.wikipedia.org/wiki/PID_controller)
@@ -12,7 +14,7 @@ package com.seattlesolvers.solverslib.controller;
  * measured value. If we consider e(t) the positional error, then
  * int(0,t)[e(t')dt'] is the total error and e'(t) is the velocity error.
  */
-public class PIDFController extends Controller {
+public class SquIDController extends Controller {
 
     private double kP, kI, kD, kF;
     private double setPoint;
@@ -34,7 +36,7 @@ public class PIDFController extends Controller {
     /**
      * The base constructor for the PIDF controller
      */
-    public PIDFController(double kp, double ki, double kd, double kf) {
+    public SquIDController(double kp, double ki, double kd, double kf) {
         this(kp, ki, kd, kf, 0, 0);
     }
 
@@ -47,7 +49,7 @@ public class PIDFController extends Controller {
      * @param pv The measured value of he pid control loop. We want sp = pv, or to the degree
      *           such that sp - pv, or e(t) < tolerance.
      */
-    public PIDFController(double kp, double ki, double kd, double kf, double sp, double pv) {
+    public SquIDController(double kp, double ki, double kd, double kf, double sp, double pv) {
         kP = kp;
         kI = ki;
         kD = kd;
@@ -210,8 +212,10 @@ public class PIDFController extends Controller {
         totalError += period * (setPoint - measuredValue);
         totalError = totalError < minIntegral ? minIntegral : Math.min(maxIntegral, totalError);
 
+        double errorVal_sqrtP = Math.signum(errorVal_p) * Math.sqrt(Math.abs(errorVal_p));
+
         // returns u(t)
-        return kP * errorVal_p + kI * totalError + kD * errorVal_v + kF * setPoint;
+        return kP * errorVal_sqrtP + kI * totalError + kD * errorVal_v + kF * setPoint;
     }
 
     public void setPIDF(double kp, double ki, double kd, double kf) {
@@ -233,7 +237,7 @@ public class PIDFController extends Controller {
     public void setP(double kp) {
         kP = kp;
     }
-
+    
     public void setI(double ki) {
         kI = ki;
     }
