@@ -2,6 +2,8 @@ package com.seattlesolvers.solverslib.pedroCommand;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.localization.Pose;
+import com.pedropathing.pathgen.BezierPoint;
+import com.pedropathing.pathgen.Point;
 import com.seattlesolvers.solverslib.command.CommandBase;
 
 /**
@@ -25,6 +27,18 @@ public class HoldPointCommand extends CommandBase {
     public HoldPointCommand(Follower follower, Pose pose, boolean isFieldCentric) {
         this.follower = follower;
         this.pose = pose;
+        this.isFieldCentric = isFieldCentric;
+    }
+
+    public HoldPointCommand(Follower follower, Point point, double heading, boolean isFieldCentric) {
+        this.follower = follower;
+        this.pose = new Pose(point.getX(), point.getY(), heading);
+        this.isFieldCentric = isFieldCentric;
+    }
+
+    public HoldPointCommand(Follower follower, BezierPoint bezierPoint, double heading, boolean isFieldCentric) {
+        this.follower = follower;
+        this.pose = new Pose(bezierPoint.getFirstControlPoint().getX(), bezierPoint.getFirstControlPoint().getY(), heading);
         this.isFieldCentric = isFieldCentric;
     }
 
