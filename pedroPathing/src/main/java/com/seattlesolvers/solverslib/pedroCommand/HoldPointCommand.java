@@ -55,4 +55,9 @@ public class HoldPointCommand extends CommandBase {
     public boolean isFinished() {
         return !follower.isBusy();
     }
+
+    @Override
+    public void end(boolean interrupted) {
+        follower.breakFollowing();
+    }
 }
