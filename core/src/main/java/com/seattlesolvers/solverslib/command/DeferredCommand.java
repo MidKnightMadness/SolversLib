@@ -19,7 +19,7 @@ import java.util.function.Supplier;
  * will cancel the command.
  *
  * <p>Note that the supplier <i>must</i> create a new Command each call. For selecting one of a
- * pre-allocated set of commands, use {@link SelectCommand}.
+ * preallocated set of commands, use {@link SelectCommand}.
  *
  * @author Suchir Ryali - X BOTS 19448
  */

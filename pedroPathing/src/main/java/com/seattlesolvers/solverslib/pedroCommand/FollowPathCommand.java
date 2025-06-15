@@ -22,7 +22,7 @@ public class FollowPathCommand extends CommandBase {
     private final Follower follower;
     private final PathChain path;
     private boolean holdEnd;
-    private double maxPower;
+    private double maxPower = 1.0;
 
     public FollowPathCommand(Follower follower, PathChain path) {
         this(follower, path, true);
@@ -62,6 +62,7 @@ public class FollowPathCommand extends CommandBase {
         this.maxPower = maxPower;
     }
 
+
     /**
      * Decides whether or not to make the robot maintain its position once the path ends.
      *
@@ -74,9 +75,9 @@ public class FollowPathCommand extends CommandBase {
     }
 
     /**
-     * Sets maxPower of the follower
+     * Decides whether or not to make the robot maintain its position once the path ends.
      *
-     * @param maxPower The maximum power the follower can use to follow the path
+     * @param maxPower If the robot should maintain its ending position
      * @return This command for compatibility in command groups
      */
     public FollowPathCommand setMaxPower(double maxPower) {
