@@ -22,6 +22,8 @@ import com.seattlesolvers.solverslib.geometry.Rotation2d;
  * drivetrains such as swerve and mecanum will often have all three components.
  */
 @SuppressWarnings("MemberName")
+
+@Deprecated
 public class ChassisSpeeds {
     /**
      * Represents forward velocity w.r.t the robot frame of reference. (Fwd is +)

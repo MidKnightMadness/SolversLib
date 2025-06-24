@@ -21,6 +21,8 @@ import com.seattlesolvers.solverslib.geometry.Twist2d;
  * path following. Furthermore, odometry can be used for latency compensation
  * when using computer-vision systems.
  */
+
+@Deprecated
 public class SwerveDriveOdometry {
     private final SwerveDriveKinematics m_kinematics;
     private Pose2d m_poseMeters;

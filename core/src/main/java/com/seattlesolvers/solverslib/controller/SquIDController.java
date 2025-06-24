@@ -1,7 +1,5 @@
 package com.seattlesolvers.solverslib.controller;
 
-import com.qualcomm.robotcore.hardware.PIDFCoefficients;
-
 /**
  * This is a PID controller (https://en.wikipedia.org/wiki/PID_controller)
  * for your robot. Internally, it performs all the calculations for you.
@@ -14,7 +12,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
  * measured value. If we consider e(t) the positional error, then
  * int(0,t)[e(t')dt'] is the total error and e'(t) is the velocity error.
  */
-public class PIDFController extends Controller {
+public class SquIDController extends Controller {
 
     private double kP, kI, kD, kF;
     private double setPoint;
@@ -34,17 +32,18 @@ public class PIDFController extends Controller {
     private double period;
 
     /**
-     * The base constructor for the PIDF controller
+     * The base constructor for the SquID controller
      */
-    public PIDFController(double kp, double ki, double kd, double kf) {
+    public SquIDController(double kp, double ki, double kd, double kf) {
         this(kp, ki, kd, kf, 0, 0);
     }
 
+
     /**
-     * Constructor for the PIDF controller with PIDFCoefficients
+     * Alternate constructor for only sqrt(P)
      */
-    public PIDFController(PIDFCoefficients coefficients) {
-        this(coefficients.p, coefficients.i, coefficients.d, coefficients.f);
+    public SquIDController(double kp) {
+        this(kp, 0, 0, 0, 0, 0);
     }
 
     /**
@@ -56,7 +55,7 @@ public class PIDFController extends Controller {
      * @param pv The measured value of he pid control loop. We want sp = pv, or to the degree
      *           such that sp - pv, or e(t) < tolerance.
      */
-    public PIDFController(double kp, double ki, double kd, double kf, double sp, double pv) {
+    public SquIDController(double kp, double ki, double kd, double kf, double sp, double pv) {
         kP = kp;
         kI = ki;
         kD = kd;
@@ -219,8 +218,10 @@ public class PIDFController extends Controller {
         totalError += period * (setPoint - measuredValue);
         totalError = totalError < minIntegral ? minIntegral : Math.min(maxIntegral, totalError);
 
+        double errorVal_sqrtP = Math.signum(errorVal_p) * Math.sqrt(Math.abs(errorVal_p));
+
         // returns u(t)
-        return kP * errorVal_p + kI * totalError + kD * errorVal_v + kF * setPoint;
+        return kP * errorVal_sqrtP + kI * totalError + kD * errorVal_v + kF * setPoint;
     }
 
     public void setPIDF(double kp, double ki, double kd, double kf) {
@@ -242,7 +243,7 @@ public class PIDFController extends Controller {
     public void setP(double kp) {
         kP = kp;
     }
-
+    
     public void setI(double ki) {
         kI = ki;
     }
