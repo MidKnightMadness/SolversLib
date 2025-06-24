@@ -4,13 +4,13 @@ import static com.seattlesolvers.solverslib.util.MathUtils.normalizeRadians;
 
 import com.seattlesolvers.solverslib.controller.PIDFController;
 import com.seattlesolvers.solverslib.geometry.Vector2d;
-import com.seattlesolvers.solverslib.solversHardware.SolversAxonServo;
-import com.seattlesolvers.solverslib.solversHardware.SolversMotor;
+import com.seattlesolvers.solverslib.hardware.motors.CRServoEx;
+import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
 
 @Deprecated
 public class CoaxialSwerveModule {
-    private final SolversMotor motor;
-    private final SolversAxonServo swervo;
+    private final MotorEx motor;
+    private final CRServoEx swervo;
     private final Vector2d offset;
     private final double maxSpeed;
     private final PIDFController swervoPIDF;
@@ -26,7 +26,7 @@ public class CoaxialSwerveModule {
      * @param offset the offset of the center of the wheel/pod from the center of the robot, in inches.
      * @param maxSpeed the maximum linear speed of the wheel/pod in inches/second.
      */
-    public CoaxialSwerveModule(SolversMotor motor, SolversAxonServo swervo, Vector2d offset, double maxSpeed, double[] swervoPIDFCoefficients) {
+    public CoaxialSwerveModule(MotorEx motor, CRServoEx swervo, Vector2d offset, double maxSpeed, double[] swervoPIDFCoefficients) {
         this.motor = motor;
         this.swervo = swervo;
         this.offset = offset;
@@ -75,7 +75,7 @@ public class CoaxialSwerveModule {
     private void updateModule() {
         // Wheel flipping optimization (if its quicker to swap motor direction and rotate the pod less, then do that)
         boolean wheelFlipped = false;
-        double error = normalizeRadians(targetVelocity.angle() - swervo.getPosition(), true);
+        double error = normalizeRadians(targetVelocity.angle() - swervo.getAbsoluteEncoder().getCurrentPosition(), true);
         if (Math.abs(error) > Math.PI/2) {
             error += Math.PI * -Math.signum(error);
             wheelFlipped = true;
@@ -83,13 +83,13 @@ public class CoaxialSwerveModule {
 
         // Set wheel speed
         if (wheelFlipped) {
-            motor.setPower(-targetVelocity.magnitude() / maxSpeed);
+            motor.set(-targetVelocity.magnitude() / maxSpeed);
         } else {
-            motor.setPower(targetVelocity.magnitude() / maxSpeed);
+            motor.set(targetVelocity.magnitude() / maxSpeed);
         }
 
         // Set swervo speed for pod rotation
-        swervo.setPower(swervoPIDF.calculate(0, error));
+        swervo.set(swervoPIDF.calculate(0, error));
     }
 
     /**
