@@ -75,7 +75,7 @@ public class CoaxialSwerveModule {
     private void updateModule() {
         // Wheel flipping optimization (if its quicker to swap motor direction and rotate the pod less, then do that)
         boolean wheelFlipped = false;
-        double error = normalizeRadians(targetVelocity.angle() - swervo.getPosition());
+        double error = normalizeRadians(targetVelocity.angle() - swervo.getPosition(), true);
         if (Math.abs(error) > Math.PI/2) {
             error += Math.PI * -Math.signum(error);
             wheelFlipped = true;
