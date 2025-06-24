@@ -1,6 +1,4 @@
-package com.seattlesolvers.solverslib;
-
-import com.seattlesolvers.solverslib.controller.Controller;
+package com.seattlesolvers.solverslib.controller;
 
 /**
  * This is a PID controller (https://en.wikipedia.org/wiki/PID_controller)
@@ -34,10 +32,18 @@ public class SquIDController extends Controller {
     private double period;
 
     /**
-     * The base constructor for the PIDF controller
+     * The base constructor for the SquID controller
      */
     public SquIDController(double kp, double ki, double kd, double kf) {
         this(kp, ki, kd, kf, 0, 0);
+    }
+
+
+    /**
+     * Alternate constructor for only sqrt(P)
+     */
+    public SquIDController(double kp) {
+        this(kp, 0, 0, 0, 0, 0);
     }
 
     /**
