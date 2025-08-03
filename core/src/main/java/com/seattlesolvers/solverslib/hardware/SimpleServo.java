@@ -100,7 +100,7 @@ public class SimpleServo {
         String controller = servo.getController().toString();
         return "SimpleServo: " + port + "; " + controller;
     }
-    
+
     private double toRadians(double angle, AngleUnit angleUnit) {
         return angleUnit == AngleUnit.DEGREES ? Math.toRadians(angle) : angle;
     }

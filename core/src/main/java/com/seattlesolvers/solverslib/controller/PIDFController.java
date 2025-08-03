@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
  * measured value. If we consider e(t) the positional error, then
  * int(0,t)[e(t')dt'] is the total error and e'(t) is the velocity error.
  */
-public class PIDFController extends Controller {
+public class PIDFController {
 
     private double kP, kI, kD, kF;
     private double setPoint;
@@ -190,7 +190,6 @@ public class PIDFController extends Controller {
      * @param pv The current measurement of the process variable.
      * @return the value produced by u(t).
      */
-    @Override
     public double calculate(double pv) {
         prevErrorVal = errorVal_p;
 
