@@ -24,7 +24,6 @@ dependencies {
     }
     api("com.pedropathing:ftc:2.0.0")
 
-
     afterEvaluate {
         api("org.solverslib:core:$version")
     }
