@@ -22,7 +22,8 @@ dependencies {
     implementation("org.ejml:ejml-simple:0.39") {
         exclude(group = "org.ejml", module = "ejml-all")
     }
-    api("com.pedropathing:pedro:1.0.8")
+    api("com.pedropathing:ftc:1.1.0-SNAPSHOT")
+
 
     afterEvaluate {
         api("org.solverslib:core:$version")
