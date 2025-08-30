@@ -1,5 +1,5 @@
 plugins {
-    id("dev.frozenmilk.android-library") version "10.1.1-0.1.3"
+    id("dev.frozenmilk.android-library") version "10.3.0-0.1.4"
     id("dev.frozenmilk.publish") version "0.0.4"
     id("dev.frozenmilk.doc") version "0.0.4"
 }
@@ -22,7 +22,7 @@ dependencies {
     implementation("org.ejml:ejml-simple:0.39") {
         exclude(group = "org.ejml", module = "ejml-all")
     }
-    api("com.pedropathing:pedro:1.0.8")
+    api("com.pedropathing:pedro:1.0.9")
 
     afterEvaluate {
         api("org.solverslib:core:$version")

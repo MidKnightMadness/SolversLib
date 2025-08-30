@@ -1,5 +1,5 @@
 plugins {
-    id("dev.frozenmilk.teamcode") version "10.1.1-0.1.3"
+    id("dev.frozenmilk.teamcode") version "10.3.0-0.1.4"
 }
 
 ftc {
@@ -12,7 +12,7 @@ dependencies {
     implementation("org.solverslib:core")
     implementation("org.solverslib:pedroPathing")
 
-    api("com.pedropathing:pedro:1.0.8")
+    api("com.pedropathing:pedro:1.0.9")
 }
 
 repositories {
