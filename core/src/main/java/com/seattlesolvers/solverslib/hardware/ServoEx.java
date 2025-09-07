@@ -41,13 +41,12 @@ public class ServoEx implements HardwareDevice {
     }
 
     /**
-     *
+     * // TODO: Add support for AngleUnit in future
      * @param hwMap hardwareMap
      * @param id the ID of the servo as configured
      * @param range the angular range of the servo in the specified angle unit (from when the servo is set to 0 to 1)
-     * @param angleUnit the angle unit to be associated with the servo
      */
-    public ServoEx(HardwareMap hwMap, String id, double range, AngleUnit angleUnit) {
+    public ServoEx(HardwareMap hwMap, String id, double range) {
         this(hwMap, id, 0.0, range);
     }
 
@@ -59,10 +58,10 @@ public class ServoEx implements HardwareDevice {
         this(hwMap, id, 0.0, 1.0);
     }
 
-    // TODO: Actually implement this (needs more research on how it behaves with get and set positions)
-//    public void scaleRange(double min, double max) {
-//        servo.scaleRange(min, max);
-//    }
+    // TODO: Add scaleRange (needs more research on how it behaves with get and set positions)
+    //public void scaleRange(double min, double max) {
+    //    servo.scaleRange(min, max);
+    //}
 
     /**
      * @param output the raw position (or angle if range or max + min were defined in constructor) the servo should be set to
