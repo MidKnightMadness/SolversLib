@@ -7,6 +7,8 @@ import com.seattlesolvers.solverslib.command.CommandBase;
 
 /**
  * A command that calls {@link Follower#holdPoint(Pose)}
+ *
+ * @author Arush - FTC 23511
  */
 public class HoldPointCommand extends CommandBase {
     private final Follower follower;
