@@ -22,7 +22,7 @@ dependencies {
     implementation("org.ejml:ejml-simple:0.39") {
         exclude(group = "org.ejml", module = "ejml-all")
     }
-    api("com.pedropathing:ftc:2.0.0")
+    compileOnly("com.pedropathing:ftc:2.0.0")
 
     afterEvaluate {
         api("org.solverslib:core:$version")
