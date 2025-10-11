@@ -1,163 +1,106 @@
 package com.seattlesolvers.solverslib.hardware;
 
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.PwmControl;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.ServoControllerEx;
-
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 /**
- * An extended Servo wrapper class which implements utility features such as
- * caching to reduce loop times and custom angle ranges.
- *
- * @author Saket
+ * An extended servo interface.
  */
-public class ServoEx implements HardwareDevice {
-    private final Servo servo;
-    private final String id;
-    private double min = 0.0;
-    private double max = 1.0;
-    private double cachingTolerance = 0.0001;
+
+@Deprecated
+public interface ServoEx extends HardwareDevice {
 
     /**
-     * The main constructor for the ServoEx object.
-     * @param hwMap hardwareMap
-     * @param id the ID of the servo as configured
-     * @param min the minimum angle of the servo in the specified angle unit (when the servo is set to 0)
-     * @param max the maximum angle of the servo in the specified angle unit (when the servo is set to 1)
+     * Rotates the servo by a certain angle.
+     *
+     * @param angle     The desired angle of rotation
+     * @param angleUnit The unit of the angle parameter
      */
-    public ServoEx(HardwareMap hwMap, String id, double min, double max) {
-        if (max < min) {
-            throw new IllegalArgumentException("Minimum angle should be less than maximum angle");
-        }
-        if (min < 0) {
-            throw new IllegalArgumentException("Minimum angle should be greater than or equal to 0!");
-        }
-        this.servo = hwMap.get(Servo.class, id);
-        this.id = id;
-        this.min = min;
-        this.max = max;
-    }
+    void rotateByAngle(double angle, AngleUnit angleUnit);
 
     /**
-     * // TODO: Add support for AngleUnit in future
-     * @param hwMap hardwareMap
-     * @param id the ID of the servo as configured
-     * @param range the angular range of the servo in the specified angle unit (from when the servo is set to 0 to 1)
+     * Rotates the servo by a certain angle in degrees.
+     *
+     * @param degrees The desired angle of rotation in degrees
      */
-    public ServoEx(HardwareMap hwMap, String id, double range) {
-        this(hwMap, id, 0.0, range);
-    }
+    void rotateByAngle(double degrees);
 
     /**
-     * @param hwMap hardwareMap
-     * @param id the ID of the servo as configured
+     * Turns the servo position to a set angle.
+     *
+     * @param angle     The desired set position of the servo
+     * @param angleUnit The unit of the angle parameter
      */
-    public ServoEx(HardwareMap hwMap, String id) {
-        this(hwMap, id, 0.0, 1.0);
-    }
-
-    // TODO: Add scaleRange (needs more research on how it behaves with get and set positions)
-    //public void scaleRange(double min, double max) {
-    //    servo.scaleRange(min, max);
-    //}
+    void turnToAngle(double angle, AngleUnit angleUnit);
 
     /**
-     * @param output the raw position (or angle if range or max + min were defined in constructor) the servo should be set to
+     * Turns the servo position to a set angle in degrees.
+     *
+     * @param degrees The desired set position of the servo in degrees
      */
-    public void set(double output) {
-        setPosition((output - min) / (max - min));
-    }
+    void turnToAngle(double degrees);
 
     /**
-     * Method for wrapping all writes to setPositions to the servo to check for caching tolerance
-     * @param pos position requested to be written to the servo
+     * Rotates by a given positional factor.
      */
-    private void setPosition(double pos) {
-        if (Math.abs(pos - getRawPosition()) > cachingTolerance) {
-            servo.setPosition(pos);
-        }
-    }
-
-    public double get() {
-        return getRawPosition() * (max - min) + min;
-    }
+    void rotateBy(double position);
 
     /**
-     * @return the raw position of the servo between 0 and 1
+     * Sets the position of the servo to the specified location.
+     *
+     * @param position The location of the servo, which ranges from 0 to 1
      */
-    public double getRawPosition() {
-        return servo.getPosition();
-    }
+    void setPosition(double position);
 
     /**
-     * @param inverted whether the servo should be inverted/reversed
+     * Sets the range of the servo at specified angles.
+     *
+     * @param min       The minimum value. Setting the servo position to 0 will bring it
+     *                  to this specified minimum.
+     * @param max       The maximum value. Setting the servo position to 1 will bring it
+     *                  to this specified maximum.
+     * @param angleUnit The unit of the range parameters
      */
-    public void setInverted(boolean inverted) {
-        servo.setDirection(inverted ? Servo.Direction.REVERSE : Servo.Direction.FORWARD);
-    }
+    void setRange(double min, double max, AngleUnit angleUnit);
 
     /**
-     * @return whether the servo is inverted/reversed
+     * Sets the range of the servo at specified angles in degrees.
+     *
+     * @param min The minimum value. Setting the servo position to 0 will bring it
+     *            to this specified minimum.
+     * @param max The maximum value. Setting the servo position to 1 will bring it
+     *            to this specified maximum.
      */
-    public boolean getInverted() {
-        return servo.getDirection().equals(Servo.Direction.REVERSE);
-    }
+    void setRange(double min, double max);
+
 
     /**
-     * @param pwmRange the PWM range the servo should be set to
-     * @return this object for chaining purposes
+     * Sets the inversion factor of the servo.
+     *
+     * <p>By default, the inversion is false.</p>
+     *
+     * @param isInverted the desired inversion factor
      */
-    public ServoEx setPwm(PwmControl.PwmRange pwmRange) {
-        getController().setServoPwmRange(servo.getPortNumber(), pwmRange);
-        return this;
-    }
+    void setInverted(boolean isInverted);
 
     /**
-     * @return the SDK, unwrapped Servo object
+     * @return true if the servo is inverted, false otherwise
      */
-    public Servo getServo() {
-        return servo;
-    }
+    boolean getInverted();
 
     /**
-     * @return the extended servo controller object for the servo
+     * @return The current position of the servo from 0 to 1.
      */
-    public ServoControllerEx getController() {
-        return (ServoControllerEx) servo.getController();
-    }
+    double getPosition();
 
     /**
-     * @return the port the servo controller is controlling the servo from
+     * @param angleUnit Angle unit for the result to be returned in
+     * @return The angle the servo's current makes with the 0 position.
      */
-    public int getPortNumber() {
-        return this.servo.getPortNumber();
-    }
+    double getAngle(AngleUnit angleUnit);
 
     /**
-     * @param cachingTolerance the new caching tolerance between servo writes
-     * @return this object for chaining purposes
+     * @return The angle the servo's current makes with the 0 position, in degrees.
      */
-    public ServoEx setCachingTolerance(double cachingTolerance) {
-        this.cachingTolerance = cachingTolerance;
-        return this;
-    }
+    double getAngle();
 
-    /**
-     * @return the caching tolerance of the servo before it writes a new power to the CR servo
-     */
-    public double getCachingTolerance() {
-        return cachingTolerance;
-    }
-
-    @Override
-    public void disable() {
-        servo.close();
-    }
-
-    @Override
-    public String getDeviceType() {
-        return "Extended Servo; " + id + " from " + servo.getPortNumber();
-    }
 }
