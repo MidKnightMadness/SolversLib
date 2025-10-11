@@ -19,7 +19,6 @@ import com.pedropathing.paths.Path;
  *
  */
 public class FollowPathCommand extends CommandBase {
-
     private final Follower follower;
     private final PathChain pathChain;
     private boolean holdEnd;

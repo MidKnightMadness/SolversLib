@@ -22,7 +22,7 @@ dependencies {
     implementation("org.ejml:ejml-simple:0.39") {
         exclude(group = "org.ejml", module = "ejml-all")
     }
-    compileOnly("com.pedropathing:ftc:2.0.0")
+    implementation("com.pedropathing:ftc:2.0.2")
 
     afterEvaluate {
         api("org.solverslib:core:$version")
@@ -31,7 +31,6 @@ dependencies {
 
 repositories {
     maven("https://maven.brott.dev/")
-    maven("https://maven.pedropathing.com/")
 }
 
 dairyPublishing {
