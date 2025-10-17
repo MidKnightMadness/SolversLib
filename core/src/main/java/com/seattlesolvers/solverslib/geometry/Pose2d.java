@@ -1,5 +1,9 @@
 package com.seattlesolvers.solverslib.geometry;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
+
 /**
  * A two-dimensional position that includes a {@link Vector2d} and
  * a heading angle. Look at {@link Vector2d} for information on what
@@ -41,6 +45,30 @@ public class Pose2d {
     public Pose2d(double x, double y, Rotation2d rotation) {
         m_translation = new Translation2d(x, y);
         m_rotation = rotation;
+    }
+
+    /**
+     * Convenience constructors that takes in x, y, and heading values directly instead of
+     * having to construct a Translation2d and Rotation2d.
+     *
+     * @param x        The x component of the translational component of the pose.
+     * @param y        The y component of the translational component of the pose.
+     * @param rotation The rotational component of the pose.
+     */
+    @SuppressWarnings("ParameterName")
+    public Pose2d(double x, double y, double rotation) {
+        m_translation = new Translation2d(x, y);
+        m_rotation = new Rotation2d(rotation);
+    }
+
+    /**
+     * Convenience constructor to convert SDK Pose2D objects to SolversLib Pose2d objects
+     * @param pose2D the SDK Pose2D object
+     * @param distanceUnit the distance unit to be used for translational values
+     * @param angleUnit the angle unit to be used for rotational values
+     */
+    public Pose2d(Pose2D pose2D, DistanceUnit distanceUnit, AngleUnit angleUnit) {
+        this(pose2D.getX(distanceUnit), pose2D.getY(distanceUnit), new Rotation2d(pose2D.getHeading(angleUnit)));
     }
 
     /**
@@ -229,5 +257,13 @@ public class Pose2d {
 
     public double getHeading() {
         return m_rotation.getRadians();
+    }
+
+    /**
+     * Converts SolversLib's Pose2d objects into the SDK's Pose2D objects
+     * @return the SDK Pose2D object
+     */
+    public static Pose2D convertToPose2D(Pose2d pose, DistanceUnit distanceUnit, AngleUnit angleUnit) {
+        return new Pose2D(distanceUnit, pose.getX(), pose.getY(), angleUnit, pose.getHeading());
     }
 }

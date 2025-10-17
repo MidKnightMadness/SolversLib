@@ -7,9 +7,9 @@
 
 package com.seattlesolvers.solverslib.command;
 
-import java.util.function.BooleanSupplier;
-
 import static com.seattlesolvers.solverslib.command.CommandGroupBase.requireUngrouped;
+
+import java.util.function.BooleanSupplier;
 
 
 /**

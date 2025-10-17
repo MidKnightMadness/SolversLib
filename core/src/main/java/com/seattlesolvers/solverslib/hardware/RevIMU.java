@@ -1,8 +1,8 @@
 package com.seattlesolvers.solverslib.hardware;
 
-import com.seattlesolvers.solverslib.geometry.Rotation2d;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.seattlesolvers.solverslib.geometry.Rotation2d;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 

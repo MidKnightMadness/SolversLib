@@ -5,7 +5,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 /**
  * An extended servo interface.
  */
-
 @Deprecated
 public interface ServoEx extends HardwareDevice {
 

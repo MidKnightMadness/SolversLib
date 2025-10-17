@@ -1,5 +1,6 @@
 package com.seattlesolvers.solverslib.command;
 
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.seattlesolvers.solverslib.controller.PIDController;
 import com.seattlesolvers.solverslib.controller.wpilibcontroller.RamseteController;
 import com.seattlesolvers.solverslib.controller.wpilibcontroller.SimpleMotorFeedforward;
@@ -8,7 +9,6 @@ import com.seattlesolvers.solverslib.kinematics.wpilibkinematics.ChassisSpeeds;
 import com.seattlesolvers.solverslib.kinematics.wpilibkinematics.DifferentialDriveKinematics;
 import com.seattlesolvers.solverslib.kinematics.wpilibkinematics.DifferentialDriveWheelSpeeds;
 import com.seattlesolvers.solverslib.trajectory.Trajectory;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;

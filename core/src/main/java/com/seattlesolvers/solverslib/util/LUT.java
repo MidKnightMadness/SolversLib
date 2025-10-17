@@ -1,6 +1,5 @@
 package com.seattlesolvers.solverslib.util;
 
-import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -19,8 +18,8 @@ public class LUT<T extends Number, R> extends TreeMap<T, R> {
      * @return the closest value to the input key
      */
     public R getClosest(T key) {
-        Map.Entry<T, R> ceil = ceilingEntry(key);
-        Map.Entry<T, R> floor = floorEntry(key);
+        Entry<T, R> ceil = ceilingEntry(key);
+        Entry<T, R> floor = floorEntry(key);
 
         if (ceil != null && floor != null) {
             double keyVal = key.doubleValue();

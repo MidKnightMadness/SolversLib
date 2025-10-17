@@ -7,6 +7,8 @@
 
 package com.seattlesolvers.solverslib.command;
 
+import static com.seattlesolvers.solverslib.trajectory.TrapezoidProfile.State;
+
 import androidx.annotation.NonNull;
 
 import com.seattlesolvers.solverslib.controller.wpilibcontroller.ProfiledPIDController;
@@ -15,8 +17,6 @@ import java.util.Arrays;
 import java.util.function.BiConsumer;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
-
-import static com.seattlesolvers.solverslib.trajectory.TrapezoidProfile.State;
 
 /**
  * A command that controls an output with a {@link ProfiledPIDController}.  Runs forever by

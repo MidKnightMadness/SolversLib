@@ -9,9 +9,8 @@
 
 package com.seattlesolvers.solverslib.command;
 
-import com.seattlesolvers.solverslib.trajectory.TrapezoidProfile;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import com.seattlesolvers.solverslib.trajectory.TrapezoidProfile;
 
 import java.util.function.Consumer;
 

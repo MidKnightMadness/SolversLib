@@ -7,8 +7,8 @@
 
 package com.seattlesolvers.solverslib.kinematics.wpilibkinematics;
 
-
 import com.seattlesolvers.solverslib.geometry.Rotation2d;
+import com.seattlesolvers.solverslib.geometry.Vector2d;
 
 /**
  * Represents the speed of a robot chassis. Although this struct contains
@@ -22,8 +22,6 @@ import com.seattlesolvers.solverslib.geometry.Rotation2d;
  * drivetrains such as swerve and mecanum will often have all three components.
  */
 @SuppressWarnings("MemberName")
-
-@Deprecated
 public class ChassisSpeeds {
     /**
      * Represents forward velocity w.r.t the robot frame of reference. (Fwd is +)
@@ -44,6 +42,7 @@ public class ChassisSpeeds {
      * Constructs a ChassisSpeeds with zeros for dx, dy, and theta.
      */
     public ChassisSpeeds() {
+        this(0, 0, 0);
     }
 
     /**
@@ -85,9 +84,17 @@ public class ChassisSpeeds {
         );
     }
 
+    public static ChassisSpeeds fromFieldRelativeSpeeds(ChassisSpeeds robotCentricSpeeds, Rotation2d robotAngle) {
+        return fromFieldRelativeSpeeds(robotCentricSpeeds.vxMetersPerSecond, robotCentricSpeeds.vyMetersPerSecond, robotCentricSpeeds.omegaRadiansPerSecond, robotAngle);
+    }
+
     @Override
     public String toString() {
         return String.format("ChassisSpeeds(Vx: %.2f m/s, Vy: %.2f m/s, Omega: %.2f rad/s)",
                 vxMetersPerSecond, vyMetersPerSecond, omegaRadiansPerSecond);
+    }
+
+    public Vector2d getTranslationalVector() {
+        return new Vector2d(vxMetersPerSecond, vyMetersPerSecond);
     }
 }
