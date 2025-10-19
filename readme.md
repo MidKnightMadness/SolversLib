@@ -9,7 +9,7 @@ Head maintainer: [Arush](https://github.com/ArushYadlapati)
 ---
 ## Resources
 
-Complete Documentation (Highly Reccomended): [https://docs.seattlesolvers.com/](https://docs.seattlesolvers.com/)
+Complete Documentation (Highly Recommended): [https://docs.seattlesolvers.com/](https://docs.seattlesolvers.com/)
 
 You can find the latest version number (and the implementation details) at the [Dairy Foundation](https://repo.dairy.foundation/#/releases/org/solverslib/core), where SolversLib is hosted.
 
