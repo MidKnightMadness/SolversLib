@@ -9,7 +9,7 @@ Head maintainer: [Arush](https://github.com/ArushYadlapati)
 ---
 ## Resources
 
-Complete Documentation (Highly Reccomended): [https://docs.seattlesolvers.com/](https://docs.seattlesolvers.com/)
+Complete Documentation (Highly Recommended): [https://docs.seattlesolvers.com/](https://docs.seattlesolvers.com/)
 
 You can find the latest version number (and the implementation details) at the [Dairy Foundation](https://repo.dairy.foundation/#/releases/org/solverslib/core), where SolversLib is hosted.
 
@@ -21,7 +21,7 @@ Javadocs for SolversLib Pedro Pathing (Pedro Pathing support in FTCLib) are avai
 
 FTCLib documentation (has information about how to use FTCLib, and does not have any information about SolversLib) - <https://docs.ftclib.org/ftclib>
 
-Please note that the vision part of FTCLib has been removed in SolversLib, as it is severly outdated. If you want vision, please use EasyOpenCV (which is built into the SDK).
+Please note that the vision part of FTCLib has been removed in SolversLib, as it is severely outdated. If you want vision, please use EasyOpenCV (which is built into the SDK).
 
 ## Installing SolversLib
 See [https://docs.seattlesolvers.com/installation](https://docs.seattlesolvers.com/installation)
