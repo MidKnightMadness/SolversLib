@@ -17,7 +17,14 @@ public class CRServo extends Motor {
     private final String id;
 
     /**
-     * The constructor for the CR Servo.
+     * The implicit constructor for the CR Servo used for inheritance.
+     */
+    public CRServo() {
+        this.id = "";
+    }
+
+    /**
+     * The constructor for the CR Servo used for actual usage.
      */
     public CRServo(HardwareMap hMap, String id) {
         crServo = hMap.get(com.qualcomm.robotcore.hardware.CRServo.class, id);
@@ -35,9 +42,10 @@ public class CRServo extends Motor {
     }
 
     @Override
-    public void setInverted(boolean isInverted) {
+    public CRServo setInverted(boolean isInverted) {
         crServo.setDirection(isInverted ? com.qualcomm.robotcore.hardware.CRServo.Direction.REVERSE
                 : com.qualcomm.robotcore.hardware.CRServo.Direction.FORWARD);
+        return this;
     }
 
     @Override

@@ -1,11 +1,14 @@
 package com.seattlesolvers.solverslib.pedroCommand;
 
 import com.pedropathing.follower.Follower;
-import com.pedropathing.localization.Pose;
+import com.pedropathing.geometry.BezierPoint;
+import com.pedropathing.geometry.Pose;
 import com.seattlesolvers.solverslib.command.CommandBase;
 
 /**
  * A command that calls {@link Follower#holdPoint(Pose)}
+ *
+ * @author Arush - FTC 23511
  */
 public class HoldPointCommand extends CommandBase {
     private final Follower follower;
@@ -31,7 +34,7 @@ public class HoldPointCommand extends CommandBase {
     @Override
     public void initialize() {
         if (!isFieldCentric) {
-            pose.add(follower.getPose());
+            pose.plus(follower.getPose());
         }
 
         follower.holdPoint(pose);
@@ -40,5 +43,10 @@ public class HoldPointCommand extends CommandBase {
     @Override
     public boolean isFinished() {
         return !follower.isBusy();
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        follower.resumePathFollowing();
     }
 }

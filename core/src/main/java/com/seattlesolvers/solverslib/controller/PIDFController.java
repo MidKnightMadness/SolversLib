@@ -9,29 +9,16 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
  * to properly utilize these calculations.
  * <p>
  * The equation we will use is:
- * u(t) = kP * e(t) + kI * int(0,t)[e(t')dt'] + kD * e'(t) + kF
+ * u(t) = kP * e(t) + kI * int(0,t)[e(t')dt'] + kD * e'(t) + kF * r(t)
  * where e(t) = r(t) - y(t) and r(t) is the setpoint and y(t) is the
  * measured value. If we consider e(t) the positional error, then
  * int(0,t)[e(t')dt'] is the total error and e'(t) is the velocity error.
  */
-public class PIDFController {
+public class PIDFController extends Controller {
+    protected double kP, kI, kD, kF;
+    protected double minIntegral, maxIntegral;
 
-    private double kP, kI, kD, kF;
-    private double setPoint;
-    private double measuredValue;
-    private double minIntegral, maxIntegral;
-
-    private double errorVal_p;
-    private double errorVal_v;
-
-    private double totalError;
-    private double prevErrorVal;
-
-    private double errorTolerance_p = 0.05;
-    private double errorTolerance_v = Double.POSITIVE_INFINITY;
-
-    private double lastTimeStamp;
-    private double period;
+    protected double totalError;
 
     /**
      * The base constructor for the PIDF controller
@@ -68,68 +55,13 @@ public class PIDFController {
         minIntegral = -1.0;
         maxIntegral = 1.0;
 
-        lastTimeStamp = 0;
-        period = 0;
-
         errorVal_p = setPoint - measuredValue;
-        reset();
     }
 
+    @Override
     public void reset() {
         totalError = 0;
-        prevErrorVal = 0;
-        lastTimeStamp = 0;
-    }
-
-    /**
-     * Sets the error which is considered tolerable for use with {@link #atSetPoint()}.
-     *
-     * @param positionTolerance Position error which is tolerable.
-     */
-    public void setTolerance(double positionTolerance) {
-        setTolerance(positionTolerance, Double.POSITIVE_INFINITY);
-    }
-
-    /**
-     * Sets the error which is considered tolerable for use with {@link #atSetPoint()}.
-     *
-     * @param positionTolerance Position error which is tolerable.
-     * @param velocityTolerance Velocity error which is tolerable.
-     */
-    public void setTolerance(double positionTolerance, double velocityTolerance) {
-        errorTolerance_p = positionTolerance;
-        errorTolerance_v = velocityTolerance;
-    }
-
-    /**
-     * Returns the current setpoint of the PIDFController.
-     *
-     * @return The current setpoint.
-     */
-    public double getSetPoint() {
-        return setPoint;
-    }
-
-    /**
-     * Sets the setpoint for the PIDFController
-     *
-     * @param sp The desired setpoint.
-     */
-    public void setSetPoint(double sp) {
-        setPoint = sp;
-        errorVal_p = setPoint - measuredValue;
-        errorVal_v = (errorVal_p - prevErrorVal) / period;
-    }
-
-    /**
-     * Returns true if the error is within the percentage of the total input range, determined by
-     * {@link #setTolerance}.
-     *
-     * @return Whether the error is within the acceptable bounds.
-     */
-    public boolean atSetPoint() {
-        return Math.abs(errorVal_p) < errorTolerance_p
-                && Math.abs(errorVal_v) < errorTolerance_v;
+        super.reset();
     }
 
     /**
@@ -140,57 +72,12 @@ public class PIDFController {
     }
 
     /**
-     * @return the positional error e(t)
-     */
-    public double getPositionError() {
-        return errorVal_p;
-    }
-
-    /**
-     * @return the tolerances of the controller
-     */
-    public double[] getTolerance() {
-        return new double[]{errorTolerance_p, errorTolerance_v};
-    }
-
-    /**
-     * @return the velocity error e'(t)
-     */
-    public double getVelocityError() {
-        return errorVal_v;
-    }
-
-    /**
-     * Calculates the next output of the PIDF controller.
-     *
-     * @return the next output using the current measured value via
-     * {@link #calculate(double)}.
-     */
-    public double calculate() {
-        return calculate(measuredValue);
-    }
-
-    /**
-     * Calculates the next output of the PIDF controller.
-     *
-     * @param pv The given measured value.
-     * @param sp The given setpoint.
-     * @return the next output using the given measurd value via
-     * {@link #calculate(double)}.
-     */
-    public double calculate(double pv, double sp) {
-        // set the setpoint to the provided value
-        setSetPoint(sp);
-        return calculate(pv);
-    }
-
-    /**
      * Calculates the control value, u(t).
      *
      * @param pv The current measurement of the process variable.
      * @return the value produced by u(t).
      */
-    public double calculate(double pv) {
+    protected double calculateOutput(double pv) {
         prevErrorVal = errorVal_p;
 
         double currentTimeStamp = (double) System.nanoTime() / 1E9;
@@ -227,6 +114,10 @@ public class PIDFController {
         kI = ki;
         kD = kd;
         kF = kf;
+    }
+
+    public void setCoefficients(PIDFCoefficients coefficients) {
+        setPIDF(coefficients.p, coefficients.i, coefficients.d, coefficients.f);
     }
 
     public void setIntegrationBounds(double integralMin, double integralMax) {
@@ -268,10 +159,6 @@ public class PIDFController {
 
     public double getF() {
         return kF;
-    }
-
-    public double getPeriod() {
-        return period;
     }
 
 }

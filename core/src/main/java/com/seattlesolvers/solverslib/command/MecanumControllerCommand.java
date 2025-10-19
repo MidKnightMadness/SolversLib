@@ -1,6 +1,7 @@
 package com.seattlesolvers.solverslib.command;
 
 
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.seattlesolvers.solverslib.controller.PIDController;
 import com.seattlesolvers.solverslib.controller.wpilibcontroller.ProfiledPIDController;
 import com.seattlesolvers.solverslib.controller.wpilibcontroller.SimpleMotorFeedforward;
@@ -10,7 +11,6 @@ import com.seattlesolvers.solverslib.kinematics.wpilibkinematics.MecanumDriveKin
 import com.seattlesolvers.solverslib.kinematics.wpilibkinematics.MecanumDriveMotorVoltages;
 import com.seattlesolvers.solverslib.kinematics.wpilibkinematics.MecanumDriveWheelSpeeds;
 import com.seattlesolvers.solverslib.trajectory.Trajectory;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;

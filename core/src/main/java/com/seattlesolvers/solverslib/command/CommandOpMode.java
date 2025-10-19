@@ -1,11 +1,9 @@
 package com.seattlesolvers.solverslib.command;
 
-import android.util.Log;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /**
- * As opposed to the general WPILib-style Robot paradigm, FTCLib also offers a command opmode
+ * As opposed to the general WPILib-style Robot paradigm, SolversLib also offers a command opmode
  * for individual opmodes.
  *
  * @author Jackson
@@ -27,14 +25,14 @@ public abstract class CommandOpMode extends LinearOpMode {
     }
 
     /**
-     * Schedules {@link com.seattlesolvers.solverslib.command.Command} objects to the scheduler
+     * Schedules {@link Command} objects to the scheduler
      */
     public void schedule(Command... commands) {
         CommandScheduler.getInstance().schedule(commands);
     }
 
     /**
-     * Registers {@link com.seattlesolvers.solverslib.command.Subsystem} objects to the scheduler
+     * Registers {@link Subsystem} objects to the scheduler
      */
     public void register(Subsystem... subsystems) {
         CommandScheduler.getInstance().registerSubsystem(subsystems);

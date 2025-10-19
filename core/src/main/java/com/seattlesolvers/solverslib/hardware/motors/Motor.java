@@ -2,14 +2,14 @@ package com.seattlesolvers.solverslib.hardware.motors;
 
 import androidx.annotation.NonNull;
 
-import com.seattlesolvers.solverslib.controller.PController;
-import com.seattlesolvers.solverslib.controller.PIDController;
-import com.seattlesolvers.solverslib.controller.wpilibcontroller.SimpleMotorFeedforward;
-import com.seattlesolvers.solverslib.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
+import com.seattlesolvers.solverslib.controller.PController;
+import com.seattlesolvers.solverslib.controller.PIDController;
+import com.seattlesolvers.solverslib.controller.wpilibcontroller.SimpleMotorFeedforward;
+import com.seattlesolvers.solverslib.hardware.HardwareDevice;
 
 import java.util.function.Supplier;
 
@@ -484,9 +484,11 @@ public class Motor implements HardwareDevice {
      * Common method for inverting direction of a motor.
      *
      * @param isInverted The state of inversion true is inverted.
+     * @return This object for chaining purposes.
      */
-    public void setInverted(boolean isInverted) {
+    public Motor setInverted(boolean isInverted) {
         motor.setDirection(isInverted ? DcMotor.Direction.REVERSE : DcMotor.Direction.FORWARD);
+        return this;
     }
 
     /**

@@ -1,8 +1,8 @@
 package com.seattlesolvers.solverslib.gamepad;
 
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.seattlesolvers.solverslib.command.button.GamepadButton;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys.Button;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 import java.util.HashMap;
 

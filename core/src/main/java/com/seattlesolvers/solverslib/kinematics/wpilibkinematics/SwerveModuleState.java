@@ -12,9 +12,8 @@ import com.seattlesolvers.solverslib.geometry.Rotation2d;
 /**
  * Represents the state of one swerve module.
  */
-@SuppressWarnings("MemberName")
-
 @Deprecated
+@SuppressWarnings("MemberName")
 public class SwerveModuleState implements Comparable<SwerveModuleState> {
 
     /**
