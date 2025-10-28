@@ -1,7 +1,6 @@
 package com.seattlesolvers.solverslib.hardware;
 
-import com.seattlesolvers.solverslib.hardware.motors.Motor;
-import com.seattlesolvers.solverslib.util.MathUtils;
+import com.seattlesolvers.solverslib.util.RotationDirection;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
@@ -24,8 +23,8 @@ public abstract class EncoderBase implements Encoder {
     }
 
     @Override
-    public EncoderBase setDirection(Motor.Direction direction) {
-        return setReversed(direction == Motor.Direction.REVERSE);
+    public EncoderBase setDirection(RotationDirection direction) {
+        return setReversed(direction == RotationDirection.REVERSE);
     }
 
     @Override

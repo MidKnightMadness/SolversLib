@@ -45,20 +45,6 @@ public class Motor implements HardwareDevice {
         }
     }
 
-    public enum Direction {
-        FORWARD(1), REVERSE(-1);
-
-        final private int val;
-
-        Direction(int multiplier) {
-            val = multiplier;
-        }
-
-        public int getMultiplier() {
-            return val;
-        }
-    }
-
     /**
      * The RunMode of the motor.
      */

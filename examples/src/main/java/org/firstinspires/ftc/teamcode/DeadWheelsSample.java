@@ -8,6 +8,7 @@ import com.seattlesolvers.solverslib.kinematics.HolonomicOdometry;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.seattlesolvers.solverslib.util.RotationDirection;
 
 /**
  * This sample shows how to use dead wheels with external encoders
@@ -63,7 +64,7 @@ public class DeadWheelsSample extends LinearOpMode {
         rightOdometer = frontRight.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
         centerOdometer = backLeft.encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 
-        rightOdometer.setDirection(Motor.Direction.REVERSE);
+        rightOdometer.setDirection(RotationDirection.REVERSE);
 
         odometry = new HolonomicOdometry(
                 leftOdometer::getDistance,

@@ -1,6 +1,6 @@
 package com.seattlesolvers.solverslib.hardware;
 
-import com.seattlesolvers.solverslib.hardware.motors.Motor;
+import com.seattlesolvers.solverslib.util.RotationDirection;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
@@ -27,7 +27,7 @@ public interface Encoder extends HardwareDevice {
      * @param direction The direction of the encoder should be reversed for any future values
      * @return The object itself for chaining purposes
      */
-    Encoder setDirection(Motor.Direction direction);
+    Encoder setDirection(RotationDirection direction);
 
     /**
      * @return Whether the encoder is reversed
