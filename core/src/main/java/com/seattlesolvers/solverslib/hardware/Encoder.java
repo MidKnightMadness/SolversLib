@@ -16,11 +16,9 @@ public interface Encoder extends HardwareDevice {
     AngleUnit getAngleUnit();
 
     /**
-     * Sets whether or not the encoder should be reversed for any future values returned when reading the encoder
-     * @param reversed Whether or not the encoder should be reversed for any future values
-     * @return The object itself for chaining purposes
+     * @return Direction multiplier: 1 for normal, -1 for reversed
      */
-    Encoder setReversed(boolean reversed);
+    int getDirectionMultiplier();
 
     /**
      * Sets whether or not the encoder should be reversed for any future values returned when reading the encoder
@@ -30,7 +28,19 @@ public interface Encoder extends HardwareDevice {
     Encoder setDirection(RotationDirection direction);
 
     /**
-     * @return Whether the encoder is reversed
+     * Sets whether or not the encoder should be reversed for any future values returned when reading the encoder
+     * @param reversed Whether or not the encoder should be reversed for any future values
+     * @return The object itself for chaining purposes
+     */
+    Encoder setReversed(boolean reversed);
+
+    /**
+     * @return The direction of the encoder
+     */
+    RotationDirection getDirection();
+
+    /**
+     * @return Whether or not an encoder is reversed
      */
     boolean getReversed();
 

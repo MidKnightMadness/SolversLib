@@ -30,7 +30,6 @@ public class AbsoluteAnalogEncoder extends EncoderBase {
         this.range = range;
         this.id = id;
         offset = 0.0;
-        reversed = false;
     }
 
     /**

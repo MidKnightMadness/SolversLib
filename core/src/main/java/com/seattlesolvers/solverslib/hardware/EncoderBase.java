@@ -6,30 +6,34 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public abstract class EncoderBase implements Encoder {
     protected double offset = 0.0;
-    protected boolean reversed = false;
+    protected RotationDirection direction = RotationDirection.FORWARD;
     protected AngleUnit angleUnit;
 
-    /**
-     * @return 1 for normal, -1 for reversed
-     */
-    public int getDirectionMultiplier() {
-        return reversed ? -1 : 1;
-    }
-
     @Override
-    public EncoderBase setReversed(boolean reversed) {
-        this.reversed = reversed;
-        return this;
+    public int getDirectionMultiplier() {
+        return direction.getMultiplier();
     }
 
     @Override
     public EncoderBase setDirection(RotationDirection direction) {
-        return setReversed(direction == RotationDirection.REVERSE);
+        this.direction = direction;
+        return this;
+    }
+
+    @Override
+    public EncoderBase setReversed(boolean reversed) {
+        direction = reversed ? RotationDirection.REVERSE : RotationDirection.FORWARD;
+        return this;
+    }
+
+    @Override
+    public RotationDirection getDirection() {
+        return direction;
     }
 
     @Override
     public boolean getReversed() {
-        return reversed;
+        return direction == RotationDirection.REVERSE;
     }
 
     @Override
