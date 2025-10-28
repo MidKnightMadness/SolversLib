@@ -16,6 +16,7 @@ public class AbsoluteAnalogEncoder extends EncoderBase {
     private final AnalogInput encoder;
     private final String id;
     private final double range;
+    private double offset;
 
     /**
      * The constructor for absolute analog encoders
@@ -28,6 +29,7 @@ public class AbsoluteAnalogEncoder extends EncoderBase {
         this.angleUnit = angleUnit;
         this.range = range;
         this.id = id;
+        offset = 0.0;
         reversed = false;
     }
 
@@ -50,13 +52,27 @@ public class AbsoluteAnalogEncoder extends EncoderBase {
     /**
      * @return The raw voltage returned by the encoder
      */
-    public double getVoltage(){
+    public double getVoltage() {
         return encoder.getVoltage();
     }
 
-    @Override
     public double getRawAngle() {
         return getVoltage() / range * MathUtils.returnMaxForAngleUnit(angleUnit);
+    }
+
+    @Override
+    public EncoderBase zero() {
+        offset += getAngle();
+        return this;
+    }
+
+    @Override
+    public double getAngle() {
+        return MathUtils.normalizeAngle(
+                getDirectionMultiplier() * (getRawAngle() + offset),
+                true,
+                angleUnit
+        );
     }
 
     @Override

@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.seattlesolvers.solverslib.drivebase.MecanumDrive;
+import com.seattlesolvers.solverslib.hardware.IncrementalEncoder;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
-import com.seattlesolvers.solverslib.hardware.motors.Motor.Encoder;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
 import com.seattlesolvers.solverslib.kinematics.HolonomicOdometry;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -40,7 +40,7 @@ public class DeadWheelsSample extends LinearOpMode {
     private MotorEx frontLeft, frontRight, backLeft, backRight;
     private MecanumDrive driveTrain;
     private Motor intakeLeft, intakeRight, liftLeft, liftRight;
-    private Encoder leftOdometer, rightOdometer, centerOdometer;
+    private IncrementalEncoder leftOdometer, rightOdometer, centerOdometer;
     private HolonomicOdometry odometry;
 
     @Override

@@ -119,7 +119,7 @@ public class Timing {
 
     /**
      * Very simple class for a refresh rate timer. Can be used to limit hardware writing/reading,
-     * or other fast-time cases. Only uses milliseconds. Starts counting on creation, can be reset.
+     * or other fast-time cases. Only uses milliseconds. Starts counting on creation, can be zero.
      */
     public class Rate {
 

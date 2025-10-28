@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.CommandSample;
 
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.drivebase.DifferentialDrive;
-import com.seattlesolvers.solverslib.hardware.motors.Motor.Encoder;
+import com.seattlesolvers.solverslib.hardware.IncrementalEncoder;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -10,7 +10,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     private final DifferentialDrive m_drive;
 
-    private final Encoder m_left, m_right;
+    private final IncrementalEncoder m_left, m_right;
 
     private final double WHEEL_DIAMETER;
 
@@ -61,8 +61,8 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     public void resetEncoders() {
-        m_left.reset();
-        m_right.reset();
+        m_left.zero();
+        m_right.zero();
     }
 
     public double getAverageEncoderDistance() {

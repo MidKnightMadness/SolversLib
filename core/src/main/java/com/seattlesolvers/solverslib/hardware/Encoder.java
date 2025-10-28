@@ -1,5 +1,7 @@
 package com.seattlesolvers.solverslib.hardware;
 
+import com.seattlesolvers.solverslib.hardware.motors.Motor;
+
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public interface Encoder extends HardwareDevice {
@@ -21,14 +23,26 @@ public interface Encoder extends HardwareDevice {
     Encoder setReversed(boolean reversed);
 
     /**
+     * Sets whether or not the encoder should be reversed for any future values returned when reading the encoder
+     * @param direction The direction of the encoder should be reversed for any future values
+     * @return The object itself for chaining purposes
+     */
+    Encoder setDirection(Motor.Direction direction);
+
+    /**
      * @return Whether the encoder is reversed
      */
     boolean getReversed();
 
     /**
-     * Sets an angular offset for any future values returned when reading the encoder
-     * @param offset The angular offset in the units specified by the user previously
+     * Resets the encoder for any future values returned
      * @return The object itself for chaining purposes
      */
-    Encoder resetAngle(double offset);
+    Encoder zero();
+
+    /**
+     * Resets the offset for any future values returned
+     * @return The object itself for chaining purposes
+     */
+    Encoder resetOffset();
 }

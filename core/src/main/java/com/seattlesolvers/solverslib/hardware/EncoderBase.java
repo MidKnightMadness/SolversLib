@@ -1,13 +1,21 @@
 package com.seattlesolvers.solverslib.hardware;
 
+import com.seattlesolvers.solverslib.hardware.motors.Motor;
 import com.seattlesolvers.solverslib.util.MathUtils;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public abstract class EncoderBase implements Encoder {
+    protected double offset = 0.0;
     protected boolean reversed = false;
-    protected double angleOffset = 0.0;
     protected AngleUnit angleUnit;
+
+    /**
+     * @return 1 for normal, -1 for reversed
+     */
+    public int getDirectionMultiplier() {
+        return reversed ? -1 : 1;
+    }
 
     @Override
     public EncoderBase setReversed(boolean reversed) {
@@ -16,23 +24,13 @@ public abstract class EncoderBase implements Encoder {
     }
 
     @Override
+    public EncoderBase setDirection(Motor.Direction direction) {
+        return setReversed(direction == Motor.Direction.REVERSE);
+    }
+
+    @Override
     public boolean getReversed() {
         return reversed;
-    }
-
-    @Override
-    public EncoderBase resetAngle(double offset) {
-        this.angleOffset = offset;
-        return this;
-    }
-
-    @Override
-    public double getAngle() {
-        return MathUtils.normalizeAngle(
-                (reversed ? -1 : 1) * (getRawAngle() + angleOffset),
-                true,
-                angleUnit
-        );
     }
 
     @Override
@@ -40,8 +38,9 @@ public abstract class EncoderBase implements Encoder {
         return angleUnit;
     }
 
-    /**
-     * @return The raw calculated angle, before reversing or offsetting
-     */
-    public abstract double getRawAngle();
+    @Override
+    public EncoderBase resetOffset() {
+        this.offset = 0;
+        return this;
+    }
 }
