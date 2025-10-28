@@ -38,8 +38,7 @@ public abstract class EncoderBase implements Encoder {
     }
 
     @Override
-    public EncoderBase resetOffset() {
+    public void resetOffset() {
         this.offset = 0;
-        return this;
     }
 }

@@ -42,7 +42,6 @@ public interface Encoder extends HardwareDevice {
 
     /**
      * Resets the offset for any future values returned
-     * @return The object itself for chaining purposes
      */
-    Encoder resetOffset();
+    void resetOffset();
 }
