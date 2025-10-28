@@ -133,9 +133,9 @@ public class IncrementalEncoder extends EncoderBase {
     }
 
     @Override
-    public double getAngle() { // TODO: implement
+    public double getAngle() {
         return MathUtils.normalizeAngle(
-                (getPosition() % ticksPerRevolution) * 360,
+                (getPosition() % ticksPerRevolution) * MathUtils.returnMaxForAngleUnit(angleUnit),
                 true,
                 angleUnit
         );
