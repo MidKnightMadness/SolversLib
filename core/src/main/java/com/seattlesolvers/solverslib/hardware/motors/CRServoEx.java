@@ -139,7 +139,7 @@ public class CRServoEx extends CRServo {
                 throw new IllegalStateException("Must have absolute encoder and PIDF coefficients for CR Servo to be in positional control");
             }
             double normalizedTarget = MathUtils.normalizeAngle(output, true, absoluteEncoder.getAngleUnit());
-            double error = MathUtils.normalizeAngle(normalizedTarget - absoluteEncoder.getCurrentPosition(), false, absoluteEncoder.getAngleUnit());
+            double error = MathUtils.normalizeAngle(normalizedTarget - absoluteEncoder.getAngle(), false, absoluteEncoder.getAngleUnit());
             double power = pidf.calculate(0, error);
             setPower(power);
         } else {

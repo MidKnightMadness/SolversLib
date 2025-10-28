@@ -11,14 +11,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
  *
  * @author Saket
  */
-public class AbsoluteAnalogEncoder implements HardwareDevice {
+public class AbsoluteAnalogEncoder extends EncoderBase {
     public static double DEFAULT_RANGE = 3.3;
     private final AnalogInput encoder;
     private final String id;
-    private double offset = 0.0;
     private final double range;
-    private final AngleUnit angleUnit;
-    private boolean reversed;
 
     /**
      * The constructor for absolute analog encoders
@@ -44,45 +41,6 @@ public class AbsoluteAnalogEncoder implements HardwareDevice {
     }
 
     /**
-     * Sets an angular offset for any future values returned when reading the encoder
-     * @param offset The angular offset in the units specified by the user previously
-     * @return The object itself for chaining purposes
-     */
-    public AbsoluteAnalogEncoder zero(double offset) {
-        this.offset = offset;
-        return this;
-    }
-
-    /**
-     * Sets whether or not the encoder should be reversed for any future values returned when reading the encoder
-     * @param reversed Whether or not the encoder should be reversed for any future values
-     * @return The object itself for chaining purposes
-     */
-    public AbsoluteAnalogEncoder setReversed(boolean reversed) {
-        this.reversed = reversed;
-        return this;
-    }
-
-    /**
-     * Gets whether the encoder is reversed or not
-     * @return Whether the encoder is reversed
-     */
-    public boolean getReversed() {
-        return reversed;
-    }
-
-    /**
-     * @return The normalized angular position of the encoder in the unit previously specified by the user from 0 to max
-     */
-    public double getCurrentPosition() {
-        return MathUtils.normalizeAngle(
-                (!reversed ? 1 - getVoltage() / range : getVoltage() / range) * MathUtils.returnMaxForAngleUnit(angleUnit) - offset,
-                true,
-                angleUnit
-        );
-    }
-
-    /**
      * @return The AnalogInput object of the encoder itself
      */
     public AnalogInput getEncoder() {
@@ -97,6 +55,11 @@ public class AbsoluteAnalogEncoder implements HardwareDevice {
     }
 
     @Override
+    public double getRawAngle() {
+        return getVoltage() / range * MathUtils.returnMaxForAngleUnit(angleUnit);
+    }
+
+    @Override
     public void disable() {
         // "take no action" (encoder.close() call in SDK)
     }
@@ -104,12 +67,5 @@ public class AbsoluteAnalogEncoder implements HardwareDevice {
     @Override
     public String getDeviceType() {
         return "Absolute Analog Encoder; " + id;
-    }
-
-    /**
-     * @return The angle unit associated with the absolute encoder
-     */
-    public AngleUnit getAngleUnit() {
-        return angleUnit;
     }
 }
