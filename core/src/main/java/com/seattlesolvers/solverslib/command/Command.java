@@ -9,6 +9,7 @@ package com.seattlesolvers.solverslib.command;
 
 import java.util.Set;
 import java.util.function.BooleanSupplier;
+import java.util.function.Function;
 
 /**
  * A state machine representing a complete action to be performed by the robot.  Commands are
@@ -317,6 +318,26 @@ public interface Command {
 
     default String getName() {
         return this.getClass().getSimpleName();
+    }
+
+    default Command setUninterruptible() {
+        return new UninterruptibleCommand(this);
+    }
+
+    default Command when(BooleanSupplier condition, Runnable runnable) {
+        return new CallbackCommand(this).when(condition, runnable);
+    }
+
+    default Command when(BooleanSupplier condition, Command command) {
+        return new CallbackCommand(this).when(condition, command);
+    }
+
+    default Command whenSelf(Function<Command, Boolean> condition, Runnable runnable) {
+        return new CallbackCommand(this).whenSelf(condition, runnable);
+    }
+
+    default Command whenSelf(Function<Command, Boolean> condition, Command command) {
+        return new CallbackCommand(this).whenSelf(condition, command);
     }
 
 }
