@@ -5,35 +5,58 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.util.MathUtils;
 
-public class IncrementalEncoder extends EncoderBase {
-    private final DcMotor encoder;
-    private final double ticksPerRevolution;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
+public class IncrementalEncoder extends EncoderBase<DcMotor, IncrementalEncoder> {
+    private final double cpr;
 
     private int lastPosition;
     private double lastTimeStamp, veloEstimate, dpp, accel, lastVelo;
 
     /**
      * The constructor for incremental encoders
-     * @param hwMap the hardwareMap
-     * @param id the ID of the encoder as configured
-     * @param ticksPerRevolution the number of encoder ticks per full revolution
-     */
-    public IncrementalEncoder(HardwareMap hwMap, String id, double ticksPerRevolution) {
-        this(hwMap.get(DcMotor.class, id), ticksPerRevolution);
-    }
-
-    /**
-     * The constructor for incremental encoders
      * @param encoder the DcMotor which encoder is bound to
-     * @param ticksPerRevolution the number of encoder ticks per full revolution
+     * @param countsPerRevolution the number of encoder ticks per full revolution, aka cycles per revolution
+     * @param angleUnit the angle unit of the encoder
      */
-    public IncrementalEncoder(DcMotor encoder, double ticksPerRevolution) {
-        this.encoder = encoder;
-        this.ticksPerRevolution = ticksPerRevolution;
+    public IncrementalEncoder(DcMotor encoder, double countsPerRevolution, AngleUnit angleUnit) {
+        super(encoder);
+        this.cpr = countsPerRevolution;
+        this.angleUnit = angleUnit;
         dpp = 1;
         lastPosition = 0;
         veloEstimate = 0;
         lastTimeStamp = (double) System.nanoTime() / 1E9;
+    }
+
+    /**
+     * The constructor for incremental encoders
+     * @param hwMap the hardwareMap
+     * @param id the ID of the encoder as configured
+     * @param countsPerRevolution the number of encoder ticks per full revolution, aka cycles per revolution
+     * @param angleUnit the angle unit of the encoder
+     */
+    public IncrementalEncoder(HardwareMap hwMap, String id, double countsPerRevolution, AngleUnit angleUnit) {
+        this(hwMap.get(DcMotor.class, id), countsPerRevolution, angleUnit);
+    }
+
+    /**
+     * The constructor for incremental encoders, defaults to radians
+     * @param encoder the DcMotor which encoder is bound to
+     * @param countsPerRevolution the number of encoder ticks per full revolution, aka cycles per revolution
+     */
+    public IncrementalEncoder(DcMotor encoder, double countsPerRevolution) {
+        this(encoder, countsPerRevolution, AngleUnit.RADIANS);
+    }
+
+    /**
+     * The constructor for incremental encoders, defaults to radians
+     * @param hwMap the hardwareMap
+     * @param id the ID of the encoder as configured
+     * @param countsPerRevolution the number of encoder ticks per full revolution, aka cycles per revolution
+     */
+    public IncrementalEncoder(HardwareMap hwMap, String id, double countsPerRevolution) {
+        this(hwMap.get(DcMotor.class, id), countsPerRevolution, AngleUnit.RADIANS);
     }
 
     /**
@@ -42,7 +65,7 @@ public class IncrementalEncoder extends EncoderBase {
     public int getPosition() {
         int currentPosition = encoder.getCurrentPosition();
         if (currentPosition != lastPosition) {
-            double currentTime = (double) System.nanoTime() / 1E9;
+            double currentTime = System.nanoTime() / 1E9;
             double dt = currentTime - lastTimeStamp;
             veloEstimate = (currentPosition - lastPosition) / dt;
             lastPosition = currentPosition;
@@ -86,7 +109,7 @@ public class IncrementalEncoder extends EncoderBase {
      * @return the number of revolutions turned by the encoder
      */
     public double getRevolutions() {
-        return getPosition() / ticksPerRevolution;
+        return getPosition() / cpr;
     }
 
     /**
@@ -126,24 +149,32 @@ public class IncrementalEncoder extends EncoderBase {
         return real;
     }
 
+    public int angleToTicks(double angle) {
+        return (int) (angle * cpr / MathUtils.returnMaxForAngleUnit(angleUnit));
+    }
+
+    public double getAngleUnnormalized() {
+        return getRevolutions() * MathUtils.returnMaxForAngleUnit(angleUnit);
+    }
+
     @Override
-    public IncrementalEncoder zero() {
-        offset = getPosition();
+    public IncrementalEncoder setAngle(double angle) {
+        offset = getPosition() - angleToTicks(angle);
         return this;
+    }
+
+    @Override
+    public DcMotor getEncoder() {
+        return encoder;
     }
 
     @Override
     public double getAngle() {
         return MathUtils.normalizeAngle(
-                (getPosition() % ticksPerRevolution) * MathUtils.returnMaxForAngleUnit(angleUnit),
+                getAngleUnnormalized(),
                 true,
                 angleUnit
         );
-    }
-
-    @Override
-    public void disable() {
-        // "take no action" (encoder.close() call in SDK)
     }
 
     @Override

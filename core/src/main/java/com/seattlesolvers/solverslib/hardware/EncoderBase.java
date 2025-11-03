@@ -1,13 +1,19 @@
 package com.seattlesolvers.solverslib.hardware;
 
+import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.seattlesolvers.solverslib.util.RotationDirection;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-public abstract class EncoderBase implements Encoder {
+public abstract class EncoderBase<E, T extends EncoderBase<E, T>> implements Encoder<E, T> {
     protected double offset = 0.0;
     protected RotationDirection direction = RotationDirection.FORWARD;
-    protected AngleUnit angleUnit;
+    protected AngleUnit angleUnit = AngleUnit.RADIANS;
+    protected final E encoder;
+
+    protected EncoderBase(E encoder) {
+        this.encoder = encoder;
+    }
 
     @Override
     public int getDirectionMultiplier() {
@@ -15,15 +21,24 @@ public abstract class EncoderBase implements Encoder {
     }
 
     @Override
-    public EncoderBase setDirection(RotationDirection direction) {
+    @SuppressWarnings("unchecked")
+    public T setDirection(RotationDirection direction) {
         this.direction = direction;
-        return this;
+        return (T) this;
     }
 
     @Override
-    public EncoderBase setReversed(boolean reversed) {
+    @SuppressWarnings("unchecked")
+    public T setReversed(boolean reversed) {
         direction = reversed ? RotationDirection.REVERSE : RotationDirection.FORWARD;
-        return this;
+        return (T) this;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public T zero() {
+        this.setAngle(0);
+        return (T) this;
     }
 
     @Override
@@ -44,5 +59,10 @@ public abstract class EncoderBase implements Encoder {
     @Override
     public void resetOffset() {
         this.offset = 0;
+    }
+
+    @Override
+    public E getEncoder() {
+        return encoder;
     }
 }

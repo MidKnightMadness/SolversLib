@@ -11,12 +11,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
  *
  * @author Saket
  */
-public class AbsoluteAnalogEncoder extends EncoderBase {
+public class AbsoluteAnalogEncoder extends EncoderBase<AnalogInput, AbsoluteAnalogEncoder> {
     public static double DEFAULT_RANGE = 3.3;
-    private final AnalogInput encoder;
     private final String id;
     private final double range;
-    private double offset;
 
     /**
      * The constructor for absolute analog encoders
@@ -25,11 +23,10 @@ public class AbsoluteAnalogEncoder extends EncoderBase {
      * @param range the range of voltage returned by the sensor
      */
     public AbsoluteAnalogEncoder(HardwareMap hwMap, String id, double range, AngleUnit angleUnit) {
-        this.encoder = hwMap.get(AnalogInput.class, id);
+        super(hwMap.get(AnalogInput.class, id));
         this.angleUnit = angleUnit;
         this.range = range;
         this.id = id;
-        offset = 0.0;
     }
 
     /**
@@ -39,13 +36,6 @@ public class AbsoluteAnalogEncoder extends EncoderBase {
      */
     public AbsoluteAnalogEncoder(HardwareMap hwMap, String id) {
         this(hwMap, id, DEFAULT_RANGE, AngleUnit.RADIANS);
-    }
-
-    /**
-     * @return The AnalogInput object of the encoder itself
-     */
-    public AnalogInput getEncoder() {
-        return encoder;
     }
 
     /**
@@ -60,9 +50,9 @@ public class AbsoluteAnalogEncoder extends EncoderBase {
     }
 
     @Override
-    public EncoderBase zero() {
-        offset += getAngle();
-        return this;
+    public AbsoluteAnalogEncoder setAngle(double angle) {
+        offset += getAngle() - angle;
+        return null;
     }
 
     @Override
@@ -72,11 +62,6 @@ public class AbsoluteAnalogEncoder extends EncoderBase {
                 true,
                 angleUnit
         );
-    }
-
-    @Override
-    public void disable() {
-        // "take no action" (encoder.close() call in SDK)
     }
 
     @Override
