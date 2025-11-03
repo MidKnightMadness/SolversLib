@@ -76,10 +76,7 @@ public class FollowPathCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        if (maxPower != 1.0) {
-            follower.followPath(pathChain, maxPower, holdEnd);
-        }
-        follower.followPath(pathChain, holdEnd);
+        follower.followPath(pathChain, maxPower, holdEnd);
     }
 
     @Override
