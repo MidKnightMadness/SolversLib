@@ -4,6 +4,11 @@ import com.seattlesolvers.solverslib.util.RotationDirection;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
+/**
+ * Provides basic implementations for the {@link Encoder} interface.
+ * @param <E> The encoder type (e.g. DcMotor, AnalogInput)
+ * @param <T> The encoder class itself (e.g. IncrementalEncoder, AbsoluteAnalogEncoder)
+ */
 public abstract class EncoderBase<E, T extends EncoderBase<E, T>> implements Encoder<E, T> {
     protected double offset = 0.0;
     protected RotationDirection direction = RotationDirection.FORWARD;
@@ -19,24 +24,36 @@ public abstract class EncoderBase<E, T extends EncoderBase<E, T>> implements Enc
         return direction.getMultiplier();
     }
 
-    @Override
     @SuppressWarnings("unchecked")
+    @Override
     public T setDirection(RotationDirection direction) {
         this.direction = direction;
         return (T) this;
     }
 
-    @Override
     @SuppressWarnings("unchecked")
+    @Override
     public T setReversed(boolean reversed) {
         direction = reversed ? RotationDirection.REVERSE : RotationDirection.FORWARD;
         return (T) this;
     }
 
-    @Override
     @SuppressWarnings("unchecked")
+    @Override
     public T zero() {
         this.setAngle(0);
+        return (T) this;
+    }
+
+    @Override
+    public T resetOffset() {
+        return setOffset(0);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public T setOffset(double offset) {
+        this.offset = offset;
         return (T) this;
     }
 
@@ -53,11 +70,6 @@ public abstract class EncoderBase<E, T extends EncoderBase<E, T>> implements Enc
     @Override
     public AngleUnit getAngleUnit() {
         return angleUnit;
-    }
-
-    @Override
-    public void resetOffset() {
-        this.offset = 0;
     }
 
     @Override

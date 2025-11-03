@@ -49,6 +49,36 @@ public class AbsoluteAnalogEncoder extends EncoderBase<AnalogInput, AbsoluteAnal
         return getVoltage() / range * MathUtils.returnMaxForAngleUnit(angleUnit);
     }
 
+    /**
+     * Alias for {@link #getAngle()} for backwards compatibility
+     * @return angle of the encoder
+     */
+    @Deprecated
+    public double getCurrentPosition() {
+        return getAngle();
+    }
+
+
+    /**
+     * Manually sets the offset. Use setOffset instead
+     * @param offset The offset angle
+     * @return The object itself for chaining purposes
+     */
+    @Deprecated
+    public AbsoluteAnalogEncoder zero(double offset) {
+        return setOffset(offset);
+    }
+
+    /**
+     * Manually sets the offset.
+     * @param offset The offset angle
+     * @return The object itself for chaining purposes
+     */
+    public AbsoluteAnalogEncoder setOffset(double offset) {
+        this.offset = offset;
+        return this;
+    }
+
     @Override
     public AbsoluteAnalogEncoder setAngle(double angle) {
         offset += getAngle() - angle;

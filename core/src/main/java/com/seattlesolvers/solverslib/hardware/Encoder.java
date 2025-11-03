@@ -4,6 +4,11 @@ import com.seattlesolvers.solverslib.util.RotationDirection;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
+/**
+ *
+ * @param <E>
+ * @param <T>
+ */
 public interface Encoder<E, T extends Encoder<E, T>> extends HardwareDevice {
     /**
      * @return The normalized angular position of the encoder
@@ -45,21 +50,26 @@ public interface Encoder<E, T extends Encoder<E, T>> extends HardwareDevice {
     boolean getReversed();
 
     /**
-     * Resets the encoder for any future values returned
+     * Resets the encoder to 0
      * @return The object itself for chaining purposes
      */
     T zero();
 
     /**
-     * Resets the encoder to a particular angle
+     * Resets the encoder to a particular angle.
      * @return The object itself for chaining purposes
      */
     T setAngle(double angle);
 
     /**
-     * Resets the offset for any future values returned
+     * Manually zeroes the offset for any future values returned
      */
-    void resetOffset();
+    T resetOffset();
+
+    /**
+     * Manually sets the offset for any future values returned
+     */
+    T setOffset(double offset);
 
     /**
      * @return The inner encoder
