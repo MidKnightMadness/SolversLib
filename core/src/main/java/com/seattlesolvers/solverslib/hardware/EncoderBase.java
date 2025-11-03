@@ -1,6 +1,5 @@
 package com.seattlesolvers.solverslib.hardware;
 
-import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.seattlesolvers.solverslib.util.RotationDirection;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;

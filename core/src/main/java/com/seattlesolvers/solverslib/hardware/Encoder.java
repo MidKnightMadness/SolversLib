@@ -1,6 +1,5 @@
 package com.seattlesolvers.solverslib.hardware;
 
-import com.seattlesolvers.solverslib.hardware.HardwareDevice;
 import com.seattlesolvers.solverslib.util.RotationDirection;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
