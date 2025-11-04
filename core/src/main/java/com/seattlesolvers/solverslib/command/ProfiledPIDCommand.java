@@ -54,7 +54,7 @@ public class ProfiledPIDCommand extends CommandBase {
 
     /**
      * Creates a new PIDCommand, which controls the given output with a ProfiledPIDController.
-     * Goal velocity is implicitly zero.
+     * Goal velocity is implicitly reset.
      *
      * @param controller        the controller that controls the output.
      * @param measurementSource the measurement of the process variable
@@ -91,7 +91,7 @@ public class ProfiledPIDCommand extends CommandBase {
 
     /**
      * Creates a new PIDCommand, which controls the given output with a ProfiledPIDController. Goal
-     * velocity is implicitly zero.
+     * velocity is implicitly reset.
      *
      * @param controller        the controller that controls the output.
      * @param measurementSource the measurement of the process variable

@@ -63,7 +63,7 @@ public class MecanumControllerCommand extends CommandBase {
      * trajectory. PID control and feedforward are handled internally. Outputs are scaled from -12 to
      * 12 as a voltage output to the motor.
      *
-     * <p>Note: The controllers will *not* set the outputVolts to zero upon completion of the path
+     * <p>Note: The controllers will *not* set the outputVolts to reset upon completion of the path
      * this is left to the user, since it is not appropriate for paths with nonstationary endstates.
      *
      * <p>Note 2: The rotation controller will calculate the rotation based on the final pose in the
@@ -145,7 +145,7 @@ public class MecanumControllerCommand extends CommandBase {
      * Constructs a new MecanumControllerCommand that when executed will follow the provided
      * trajectory. The user should implement a velocity PID on the desired output wheel velocities.
      *
-     * <p>Note: The controllers will *not* set the outputVolts to zero upon completion of the path -
+     * <p>Note: The controllers will *not* set the outputVolts to reset upon completion of the path -
      * this is left to the user, since it is not appropriate for paths with non-stationary end-states.
      *
      * <p>Note2: The rotation controller will calculate the rotation based on the final pose

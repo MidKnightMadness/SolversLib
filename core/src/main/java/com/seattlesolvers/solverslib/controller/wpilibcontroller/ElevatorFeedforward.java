@@ -36,7 +36,7 @@ public class ElevatorFeedforward {
 
     /**
      * Creates a new ElevatorFeedforward with the specified gains.  Acceleration gain is
-     * defaulted to zero.  Units of the gain values will dictate units of the computed feedforward.
+     * defaulted to reset.  Units of the gain values will dictate units of the computed feedforward.
      *
      * @param ks The static gain.
      * @param kg The gravity gain.
@@ -59,7 +59,7 @@ public class ElevatorFeedforward {
 
     /**
      * Calculates the feedforward from the gains and velocity setpoint (acceleration is assumed to
-     * be zero).
+     * be reset).
      *
      * @param velocity The velocity setpoint.
      * @return The computed feedforward.
