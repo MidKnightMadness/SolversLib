@@ -1,8 +1,11 @@
 package com.seattlesolvers.solverslib.command;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 
@@ -10,12 +13,13 @@ import java.util.function.Function;
  * Wrapper to easily add callbacks to a command
  * @author Daniel - FTC 7854
  */
-public class CallbackCommand extends CommandBase {
+public class CallbackCommand<T extends Command> implements Command {
     private final Map<BooleanSupplier, Runnable> whenRunnables = new HashMap<>();
     private final Map<BooleanSupplier, Command> whenCommands = new HashMap<>();
-    private final Map<Function<Command, Boolean>, Runnable> whenSelfRunnables = new HashMap<>();
-    private final Map<Function<Command, Boolean>, Command> whenSelfCommands = new HashMap<>();
-    private final Command command;
+    private final Map<Function<T, Boolean>, Runnable> whenSelfRunnables = new HashMap<>();
+    private final Map<Function<T, Boolean>, Command> whenSelfCommands = new HashMap<>();
+    protected Set<Subsystem> m_requirements = new HashSet<>();
+    private final T command;
 
     /**
      * Wrapper for adding custom callbacks to commands. This expects a single command,
@@ -24,8 +28,12 @@ public class CallbackCommand extends CommandBase {
      * {@link SequentialCommandGroup}
      * {@link ParallelCommandGroup}
      */
-    public CallbackCommand(Command command) {
+    public CallbackCommand(T command) {
         this.command = command;
+    }
+
+    public final void addRequirements(Subsystem... requirements) {
+        m_requirements.addAll(Arrays.asList(requirements));
     }
 
     /**
@@ -35,7 +43,7 @@ public class CallbackCommand extends CommandBase {
      * @return Itself for chaining purposes
      */
     @Override
-    public CallbackCommand when(BooleanSupplier condition, Runnable runnable) {
+    public CallbackCommand<T> when(BooleanSupplier condition, Runnable runnable) {
         whenRunnables.put(condition, runnable);
         return this;
     }
@@ -47,7 +55,7 @@ public class CallbackCommand extends CommandBase {
      * @return Itself for chaining purposes
      */
     @Override
-    public CallbackCommand when(BooleanSupplier condition, Command command) {
+    public CallbackCommand<T> when(BooleanSupplier condition, Command command) {
         whenCommands.put(condition, command);
         return this;
     }
@@ -58,8 +66,7 @@ public class CallbackCommand extends CommandBase {
      * @param runnable Callback to run
      * @return Itself for chaining purposes
      */
-    @Override
-    public CallbackCommand whenSelf(Function<Command, Boolean> condition, Runnable runnable) {
+    public CallbackCommand<T> whenSelf(Function<T, Boolean> condition, Runnable runnable) {
         whenSelfRunnables.put(condition, runnable);
         return this;
     }
@@ -70,8 +77,7 @@ public class CallbackCommand extends CommandBase {
      * @param command Command to schedule
      * @return Itself for chaining purposes
      */
-    @Override
-    public CallbackCommand whenSelf(Function<Command, Boolean> condition, Command command) {
+    public CallbackCommand<T> whenSelf(Function<T, Boolean> condition, Command command) {
         whenSelfCommands.put(condition, command);
         return this;
     }
@@ -100,15 +106,15 @@ public class CallbackCommand extends CommandBase {
         }
 
         // Self callbacks
-        for (Iterator<Map.Entry<Function<Command, Boolean>, Runnable>> it = whenSelfRunnables.entrySet().iterator(); it.hasNext();) {
-            Map.Entry<Function<Command, Boolean>, Runnable> action = it.next();
+        for (Iterator<Map.Entry<Function<T, Boolean>, Runnable>> it = whenSelfRunnables.entrySet().iterator(); it.hasNext();) {
+            Map.Entry<Function<T, Boolean>, Runnable> action = it.next();
             if (action.getKey().apply(command)) {
                 action.getValue().run();
                 it.remove();
             }
         }
-        for (Iterator<Map.Entry<Function<Command, Boolean>, Command>> it = whenSelfCommands.entrySet().iterator(); it.hasNext();) {
-            Map.Entry<Function<Command, Boolean>, Command> action = it.next();
+        for (Iterator<Map.Entry<Function<T, Boolean>, Command>> it = whenSelfCommands.entrySet().iterator(); it.hasNext();) {
+            Map.Entry<Function<T, Boolean>, Command> action = it.next();
             if (action.getKey().apply(command)) {
                 action.getValue().schedule();
                 it.remove();
@@ -119,5 +125,10 @@ public class CallbackCommand extends CommandBase {
     @Override
     public boolean isFinished() {
         return !CommandScheduler.getInstance().isScheduled(command);
+    }
+
+    @Override
+    public Set<Subsystem> getRequirements() {
+        return m_requirements;
     }
 }
