@@ -123,7 +123,7 @@ public class TrapezoidProfile {
 
         // Deal with a possibly truncated motion profile (with nonzero initial or
         // final velocity) by calculating the parameters as if the profile began and
-        // ended at reset velocity
+        // ended at zero velocity
         double cutoffBegin = m_initial.velocity / m_constraints.maxAcceleration;
         double cutoffDistBegin = cutoffBegin * cutoffBegin * m_constraints.maxAcceleration / 2.0;
 

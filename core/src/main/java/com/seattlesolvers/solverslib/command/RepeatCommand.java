@@ -73,7 +73,7 @@ public class RepeatCommand extends CommandBase{
         timesRepeated = 0;
 
         if (maxRepeatTimes <= 0) {
-            throw new IllegalArgumentException("RepeatCommands' maxRepeatTimes cannot be negative or reset!");
+            throw new IllegalArgumentException("RepeatCommands' maxRepeatTimes cannot be negative or zero!");
         }
 
         requireUngrouped(command);
