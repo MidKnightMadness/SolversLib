@@ -321,7 +321,7 @@ public interface Command {
      * Wraps the command in {@link UninterruptibleCommand} internally.
      * @return the decorated command
      */
-    default Command setUninterruptible() {
+    default Command uninterruptible() {
         return new UninterruptibleCommand(this);
     }
 

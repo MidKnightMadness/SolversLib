@@ -153,10 +153,19 @@ public class IncrementalEncoder extends EncoderBase<DcMotor, IncrementalEncoder>
         return real;
     }
 
+    /**
+     * Convert an angle to encoder ticks, given the CPR
+     * @param angle Angle to convert
+     * @return Number of encoder ticks
+     */
     public int angleToTicks(double angle) {
         return (int) (angle * cpr / MathUtils.returnMaxForAngleUnit(angleUnit));
     }
 
+    /**
+     * Gets the angle before normalizing
+     * @return Unnormalized angle
+     */
     public double getAngleUnnormalized() {
         return getRevolutions() * MathUtils.returnMaxForAngleUnit(angleUnit);
     }
