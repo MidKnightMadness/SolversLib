@@ -290,7 +290,7 @@ public class ProfiledPIDController {
      * Reset the previous error and the integral term.
      *
      * @param measuredPosition The current measured position of the system. The velocity is
-     *                         assumed to be zero.
+     *                         assumed to be reset.
      */
     public void reset(double measuredPosition) {
         reset(measuredPosition, 0.0);

@@ -5,9 +5,11 @@ import com.seattlesolvers.solverslib.util.RotationDirection;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 /**
+ * The Encoder interface that defines common angle methods
+ * @param <E> The hardware class (e.g. DcMotor, AnalogInput)
+ * @param <T> The encoder class itself (e.g. IncrementalEncoder, AbsoluteAnalogEncoder)
  *
- * @param <E>
- * @param <T>
+ * @author Daniel
  */
 public interface Encoder<E, T extends Encoder<E, T>> extends HardwareDevice {
     /**
@@ -68,7 +70,7 @@ public interface Encoder<E, T extends Encoder<E, T>> extends HardwareDevice {
     /**
      * Manually zeroes the offset for any future values returned
      */
-    default T resetOffset() {
+    default T zeroOffset() {
         return setOffset(0);
     }
 
@@ -76,7 +78,7 @@ public interface Encoder<E, T extends Encoder<E, T>> extends HardwareDevice {
      * Resets the encoder to 0
      * @return The object itself for chaining purposes
      */
-    default T zero() {
+    default T reset() {
         return setAngle(0);
     }
 

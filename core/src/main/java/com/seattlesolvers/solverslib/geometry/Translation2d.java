@@ -5,7 +5,7 @@ public class Translation2d {
     private final double m_y;
 
     /**
-     * Constructs a Translation2d with X and Y components equal to zero.
+     * Constructs a Translation2d with X and Y components equal to reset.
      */
     public Translation2d() {
         this(0.0, 0.0);

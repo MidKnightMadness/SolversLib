@@ -5,9 +5,8 @@ import com.seattlesolvers.solverslib.util.RotationDirection;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 /**
- * Provides basic implementations for the {@link Encoder} interface.
- * @param <E> The encoder type (e.g. DcMotor, AnalogInput)
- * @param <T> The encoder class itself (e.g. IncrementalEncoder, AbsoluteAnalogEncoder)
+ * A base class for {@link Encoder}.
+ * @author Daniel - 7854
  */
 public abstract class EncoderBase<E, T extends EncoderBase<E, T>> implements Encoder<E, T> {
     protected double offset = 0.0;

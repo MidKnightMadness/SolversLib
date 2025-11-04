@@ -10,6 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
  * An extended wrapper class for AnalogInput absolute encoders.
  *
  * @author Saket
+ * @author Daniel - 7854
  */
 public class AbsoluteAnalogEncoder extends EncoderBase<AnalogInput, AbsoluteAnalogEncoder> {
     public static double DEFAULT_RANGE = 3.3;

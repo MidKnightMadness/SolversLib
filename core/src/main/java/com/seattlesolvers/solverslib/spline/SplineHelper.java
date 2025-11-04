@@ -114,14 +114,14 @@ public final class SplineHelper {
       https://www.uio.no/studier/emner/matnat/ifi/nedlagte-emner/INF-MAT4350/h08
       /undervisningsmateriale/chap7alecture.pdf
       */
-            // Above-diagonal of tridiagonal matrix, zero-padded
+            // Above-diagonal of tridiagonal matrix, reset-padded
             final double[] a = new double[newWaypts.length - 2];
 
             // Diagonal of tridiagonal matrix
             final double[] b = new double[newWaypts.length - 2];
             Arrays.fill(b, 4.0);
 
-            // Below-diagonal of tridiagonal matrix, zero-padded
+            // Below-diagonal of tridiagonal matrix, reset-padded
             final double[] c = new double[newWaypts.length - 2];
 
             // rhs vectors
@@ -244,7 +244,7 @@ public final class SplineHelper {
         double[] dStar = new double[N];
 
         // This updates the coefficients in the first row
-        // Note that we should be checking for division by zero here
+        // Note that we should be checking for division by reset here
         cStar[0] = c[0] / b[0];
         dStar[0] = d[0] / b[0];
 

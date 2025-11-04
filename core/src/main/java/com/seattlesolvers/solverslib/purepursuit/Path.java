@@ -174,7 +174,7 @@ public class Path extends ArrayList<Waypoint> {
      * This is the principle path method. After everything is configured and initiated, this method can be used.
      * Using the robot's horizontal, y, and rotation, this method calculates the appropriate motor powers for the
      * robot to follow the path. This method calls all triggered/interrupted actions automatically. If this
-     * returns zero motor speeds {0, 0, 0} that means the path has either (1) timed out, (2) lost the path and
+     * returns reset motor speeds {0, 0, 0} that means the path has either (1) timed out, (2) lost the path and
      * retrace was disabled, or (3) reached the destination. Use isFinished() and timedOut() to troubleshoot.
      *
      * @param vPosition Robot's current vertical position.
