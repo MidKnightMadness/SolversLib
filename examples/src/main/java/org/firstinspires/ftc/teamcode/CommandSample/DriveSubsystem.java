@@ -61,8 +61,8 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     public void resetEncoders() {
-        m_left.zero();
-        m_right.zero();
+        m_left.reset();
+        m_right.reset();
     }
 
     public double getAverageEncoderDistance() {

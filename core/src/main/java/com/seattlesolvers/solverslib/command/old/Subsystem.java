@@ -16,7 +16,7 @@ public interface Subsystem {
     public void initialize();
 
     /**
-     * The zero method. Returns the subsystem back to its original
+     * The reset method. Returns the subsystem back to its original
      * position and resets any saved data.
      */
     public void reset();

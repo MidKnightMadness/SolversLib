@@ -21,8 +21,8 @@ import com.seattlesolvers.solverslib.geometry.Twist2d;
  * path following. Furthermore, odometry can be used for latency compensation
  * when using computer-vision systems.
  *
- * <p>It is important that you zero your encoders to zero before using this class.
- * Any subsequent pose resets also require the encoders to be zero to zero.
+ * <p>It is important that you reset your encoders to zero before using this class.
+ * Any subsequent pose resets also require the encoders to be reset to zero.
  */
 public class DifferentialDriveOdometry {
     private Pose2d m_poseMeters;
@@ -58,9 +58,9 @@ public class DifferentialDriveOdometry {
     /**
      * Resets the robot's position on the field.
      *
-     * <p>You NEED to zero your encoders (to zero) when calling this method.
+     * <p>You NEED to reset your encoders (to zero) when calling this method.
      *
-     * <p>The gyroscope angle does not need to be zero here on the user's robot code.
+     * <p>The gyroscope angle does not need to be reset here on the user's robot code.
      * The library automatically takes care of offsetting the gyro angle.
      *
      * @param poseMeters The position on the field that your robot is at.

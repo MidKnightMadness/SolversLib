@@ -7,9 +7,13 @@ import com.seattlesolvers.solverslib.util.MathUtils;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
+/**
+ * An extended wrapper class for DcMotor incremental/quadrature encoders.
+ *
+ * @author Daniel - 7854
+ */
 public class IncrementalEncoder extends EncoderBase<DcMotor, IncrementalEncoder> {
     private final double cpr;
-
     private int lastPosition;
     private double lastTimeStamp, veloEstimate, dpp, accel, lastVelo;
 
@@ -77,7 +81,7 @@ public class IncrementalEncoder extends EncoderBase<DcMotor, IncrementalEncoder>
     /**
      * @return the distance per pulse
      */
-    public double getDpp() {
+    public double getDistancePerPulse() {
         return dpp;
     }
 

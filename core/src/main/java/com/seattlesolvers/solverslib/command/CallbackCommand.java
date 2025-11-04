@@ -7,7 +7,7 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 
 /**
- * Schedules a Command as uninterruptible
+ * Wrapper to easily add callbacks to a command
  * @author Daniel - FTC 7854
  */
 public class CallbackCommand extends CommandBase {

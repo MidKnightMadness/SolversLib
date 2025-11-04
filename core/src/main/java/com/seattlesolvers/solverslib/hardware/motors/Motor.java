@@ -25,7 +25,7 @@ public class Motor implements HardwareDevice {
         RPM_117(1425.2, 117), RPM_223(753.2, 223), RPM_312(537.6, 312), RPM_435(383.6, 435),
         RPM_1150(145.6, 1150), RPM_1620(103.6, 1620), BARE(28, 6000), NONE(0, 0);
 
-        final private double cpr, rpm;
+        private final double cpr, rpm;
 
         GoBILDA(double cpr, double rpm) {
             this.cpr = cpr;
@@ -199,14 +199,14 @@ public class Motor implements HardwareDevice {
      * Resets the external encoder wrapper value.
      */
     public void resetEncoder() {
-        encoder.zero();
+        encoder.reset();
     }
 
     /**
      * Resets the internal position of the motor.
      */
     public void stopAndResetEncoder() {
-        encoder.resetOffset();
+        encoder.zeroOffset();
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
@@ -317,7 +317,7 @@ public class Motor implements HardwareDevice {
      * @param target the target position in ticks
      */
     public void setTargetPosition(int target) {
-        setTargetDistance(target * encoder.getDpp());
+        setTargetDistance(target * encoder.getDistancePerPulse());
     }
 
     /**

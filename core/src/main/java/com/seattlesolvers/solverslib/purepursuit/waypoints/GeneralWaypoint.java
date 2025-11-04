@@ -253,7 +253,7 @@ public class GeneralWaypoint extends Pose2d implements Waypoint {
      * Resets this waypoint. This is called by Path.
      */
     public void reset() {
-        // GeneralWaypoints don't have anything to zero.
+        // GeneralWaypoints don't have anything to reset.
     }
 
     /**
