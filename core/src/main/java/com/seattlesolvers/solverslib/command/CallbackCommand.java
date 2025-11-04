@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
-import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Wrapper to easily add callbacks to a command
@@ -16,8 +16,8 @@ import java.util.function.Function;
 public class CallbackCommand<T extends Command> implements Command {
     private final Map<BooleanSupplier, Runnable> whenRunnables = new HashMap<>();
     private final Map<BooleanSupplier, Command> whenCommands = new HashMap<>();
-    private final Map<Function<T, Boolean>, Runnable> whenSelfRunnables = new HashMap<>();
-    private final Map<Function<T, Boolean>, Command> whenSelfCommands = new HashMap<>();
+    private final Map<Predicate<T>, Runnable> whenSelfRunnables = new HashMap<>();
+    private final Map<Predicate<T>, Command> whenSelfCommands = new HashMap<>();
     protected Set<Subsystem> m_requirements = new HashSet<>();
     private final T command;
 
@@ -66,7 +66,7 @@ public class CallbackCommand<T extends Command> implements Command {
      * @param runnable Callback to run
      * @return Itself for chaining purposes
      */
-    public CallbackCommand<T> whenSelf(Function<T, Boolean> condition, Runnable runnable) {
+    public CallbackCommand<T> whenSelf(Predicate<T> condition, Runnable runnable) {
         whenSelfRunnables.put(condition, runnable);
         return this;
     }
@@ -77,7 +77,7 @@ public class CallbackCommand<T extends Command> implements Command {
      * @param command Command to schedule
      * @return Itself for chaining purposes
      */
-    public CallbackCommand<T> whenSelf(Function<T, Boolean> condition, Command command) {
+    public CallbackCommand<T> whenSelf(Predicate<T> condition, Command command) {
         whenSelfCommands.put(condition, command);
         return this;
     }
@@ -106,16 +106,16 @@ public class CallbackCommand<T extends Command> implements Command {
         }
 
         // Self callbacks
-        for (Iterator<Map.Entry<Function<T, Boolean>, Runnable>> it = whenSelfRunnables.entrySet().iterator(); it.hasNext();) {
-            Map.Entry<Function<T, Boolean>, Runnable> action = it.next();
-            if (action.getKey().apply(command)) {
+        for (Iterator<Map.Entry<Predicate<T>, Runnable>> it = whenSelfRunnables.entrySet().iterator(); it.hasNext();) {
+            Map.Entry<Predicate<T>, Runnable> action = it.next();
+            if (action.getKey().test(command)) {
                 action.getValue().run();
                 it.remove();
             }
         }
-        for (Iterator<Map.Entry<Function<T, Boolean>, Command>> it = whenSelfCommands.entrySet().iterator(); it.hasNext();) {
-            Map.Entry<Function<T, Boolean>, Command> action = it.next();
-            if (action.getKey().apply(command)) {
+        for (Iterator<Map.Entry<Predicate<T>, Command>> it = whenSelfCommands.entrySet().iterator(); it.hasNext();) {
+            Map.Entry<Predicate<T>, Command> action = it.next();
+            if (action.getKey().test(command)) {
                 action.getValue().schedule();
                 it.remove();
             }
