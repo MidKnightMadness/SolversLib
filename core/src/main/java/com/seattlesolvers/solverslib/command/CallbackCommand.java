@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
@@ -16,8 +17,10 @@ import java.util.function.Predicate;
 public class CallbackCommand<T extends Command> implements Command {
     private final Map<BooleanSupplier, Runnable> whenRunnables = new HashMap<>();
     private final Map<BooleanSupplier, Command> whenCommands = new HashMap<>();
+    private final Map<BooleanSupplier, Consumer<T>> whenConsumers = new HashMap<>();
     private final Map<Predicate<T>, Runnable> whenSelfRunnables = new HashMap<>();
     private final Map<Predicate<T>, Command> whenSelfCommands = new HashMap<>();
+    private final Map<Predicate<T>, Consumer<T>> whenSelfConsumers = new HashMap<>();
     protected Set<Subsystem> m_requirements = new HashSet<>();
     private final T command;
 
@@ -39,46 +42,68 @@ public class CallbackCommand<T extends Command> implements Command {
     /**
      * Adds a callback with a boolean supplier
      * @param condition Runs the runnable the first time this is true
-     * @param runnable Callback to run
+     * @param action Callback to run
      * @return Itself for chaining purposes
      */
     @Override
-    public CallbackCommand<T> when(BooleanSupplier condition, Runnable runnable) {
-        whenRunnables.put(condition, runnable);
+    public CallbackCommand<T> when(BooleanSupplier condition, Runnable action) {
+        whenRunnables.put(condition, action);
         return this;
     }
 
     /**
      * Adds a callback with a boolean supplier
      * @param condition Schedules the command the first time this is true
-     * @param command Command to schedule
+     * @param action Command to schedule
      * @return Itself for chaining purposes
      */
     @Override
-    public CallbackCommand<T> when(BooleanSupplier condition, Command command) {
-        whenCommands.put(condition, command);
+    public CallbackCommand<T> when(BooleanSupplier condition, Command action) {
+        whenCommands.put(condition, action);
+        return this;
+    }
+
+    /**
+     * Adds a callback with a boolean supplier
+     * @param condition Schedules the command the first time this is true
+     * @param action Consumer for using the inner command
+     * @return Itself for chaining purposes
+     */
+    public CallbackCommand<T> when(BooleanSupplier condition, Consumer<T> action) {
+        whenConsumers.put(condition, action);
         return this;
     }
 
     /**
      * Adds a callback with access to the inner command
      * @param condition Runs the runnable the first time this is true
-     * @param runnable Callback to run
+     * @param action Callback to run
      * @return Itself for chaining purposes
      */
-    public CallbackCommand<T> whenSelf(Predicate<T> condition, Runnable runnable) {
-        whenSelfRunnables.put(condition, runnable);
+    public CallbackCommand<T> whenSelf(Predicate<T> condition, Runnable action) {
+        whenSelfRunnables.put(condition, action);
         return this;
     }
 
     /**
      * Adds a callback with access to the inner command
      * @param condition Schedules the command the first time this is true
-     * @param command Command to schedule
+     * @param action Consumer for using the inner command
      * @return Itself for chaining purposes
      */
-    public CallbackCommand<T> whenSelf(Predicate<T> condition, Command command) {
-        whenSelfCommands.put(condition, command);
+    public CallbackCommand<T> whenSelf(Predicate<T> condition, Command action) {
+        whenSelfCommands.put(condition, action);
+        return this;
+    }
+
+    /**
+     * Adds a callback with access to the inner command
+     * @param condition Schedules the command the first time this is true
+     * @param action Command to schedule
+     * @return Itself for chaining purposes
+     */
+    public CallbackCommand<T> whenSelf(Predicate<T> condition, Consumer<T> action) {
+        whenSelfConsumers.put(condition, action);
         return this;
     }
 
@@ -104,6 +129,13 @@ public class CallbackCommand<T extends Command> implements Command {
                 it.remove();
             }
         }
+        for (Iterator<Map.Entry<BooleanSupplier, Consumer<T>>> it = whenConsumers.entrySet().iterator(); it.hasNext();) {
+            Map.Entry<BooleanSupplier, Consumer<T>> action = it.next();
+            if (action.getKey().getAsBoolean()) {
+                action.getValue().accept(command);
+                it.remove();
+            }
+        }
 
         // Self callbacks
         for (Iterator<Map.Entry<Predicate<T>, Runnable>> it = whenSelfRunnables.entrySet().iterator(); it.hasNext();) {
@@ -117,6 +149,13 @@ public class CallbackCommand<T extends Command> implements Command {
             Map.Entry<Predicate<T>, Command> action = it.next();
             if (action.getKey().test(command)) {
                 action.getValue().schedule();
+                it.remove();
+            }
+        }
+        for (Iterator<Map.Entry<Predicate<T>, Consumer<T>>> it = whenSelfConsumers.entrySet().iterator(); it.hasNext();) {
+            Map.Entry<Predicate<T>, Consumer<T>> action = it.next();
+            if (action.getKey().test(command)) {
+                action.getValue().accept(command);
                 it.remove();
             }
         }
