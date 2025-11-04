@@ -316,28 +316,56 @@ public interface Command {
         return false;
     }
 
-    default String getName() {
-        return this.getClass().getSimpleName();
-    }
-
+    /**
+     * Sets this command as uninterruptible.
+     * Wraps the command in {@link UninterruptibleCommand} internally.
+     * @return the decorated command
+     */
     default Command setUninterruptible() {
         return new UninterruptibleCommand(this);
     }
 
+    /**
+     * Adds a callback with a boolean supplier
+     * @param condition Runs the runnable the first time this is true
+     * @param runnable Callback to run
+     * @return the decorated command
+     */
     default Command when(BooleanSupplier condition, Runnable runnable) {
         return new CallbackCommand(this).when(condition, runnable);
     }
 
+    /**
+     * Adds a callback with a boolean supplier
+     * @param condition Schedules the command the first time this is true
+     * @param command Command to schedule
+     * @return the decorated command
+     */
     default Command when(BooleanSupplier condition, Command command) {
         return new CallbackCommand(this).when(condition, command);
     }
 
+    /**
+     * Adds a callback with access to the inner command
+     * @param condition Runs the runnable the first time this is true
+     * @param runnable Callback to run
+     * @return the decorated command
+     */
     default Command whenSelf(Function<Command, Boolean> condition, Runnable runnable) {
         return new CallbackCommand(this).whenSelf(condition, runnable);
     }
 
+    /**
+     * Adds a callback with access to the inner command
+     * @param condition Schedules the command the first time this is true
+     * @param command Command to schedule
+     * @return the decorated command
+     */
     default Command whenSelf(Function<Command, Boolean> condition, Command command) {
         return new CallbackCommand(this).whenSelf(condition, command);
     }
 
+    default String getName() {
+        return this.getClass().getSimpleName();
+    }
 }

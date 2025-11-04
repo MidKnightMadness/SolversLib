@@ -40,18 +40,6 @@ public abstract class EncoderBase<E, T extends EncoderBase<E, T>> implements Enc
 
     @SuppressWarnings("unchecked")
     @Override
-    public T zero() {
-        this.setAngle(0);
-        return (T) this;
-    }
-
-    @Override
-    public T resetOffset() {
-        return setOffset(0);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
     public T setOffset(double offset) {
         this.offset = offset;
         return (T) this;

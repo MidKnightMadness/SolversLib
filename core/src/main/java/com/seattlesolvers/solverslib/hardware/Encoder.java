@@ -50,21 +50,10 @@ public interface Encoder<E, T extends Encoder<E, T>> extends HardwareDevice {
     boolean getReversed();
 
     /**
-     * Resets the encoder to 0
-     * @return The object itself for chaining purposes
-     */
-    T zero();
-
-    /**
      * Resets the encoder to a particular angle.
      * @return The object itself for chaining purposes
      */
     T setAngle(double angle);
-
-    /**
-     * Manually zeroes the offset for any future values returned
-     */
-    T resetOffset();
 
     /**
      * Manually sets the offset for any future values returned
@@ -75,6 +64,21 @@ public interface Encoder<E, T extends Encoder<E, T>> extends HardwareDevice {
      * @return The inner encoder
      */
     E getEncoder();
+
+    /**
+     * Manually zeroes the offset for any future values returned
+     */
+    default T resetOffset() {
+        return setOffset(0);
+    }
+
+    /**
+     * Resets the encoder to 0
+     * @return The object itself for chaining purposes
+     */
+    default T zero() {
+        return setAngle(0);
+    }
 
     @Override
     default void disable() {
