@@ -47,7 +47,7 @@ public class CRServoEx<T extends Encoder<?, ?>> extends CRServo {
      *
      * <p> Example Usage: </p>
      * <pre>{@code
-     * CRServoEx<AbsoluteAnalogEncoder> = new CrServoEx<>(
+     * CRServoEx<AbsoluteAnalogEncoder> servo = new CrServoEx<>(
      *     hardwareMap,
      *     "servoId",
      *     "encoderId",
@@ -62,7 +62,11 @@ public class CRServoEx<T extends Encoder<?, ?>> extends CRServo {
      * @param analogRange the range of voltage for the absolute encoder
      * @param angleUnit the angle unit for the absolute encoder
      * @param runmode the runmode of the CR servo
+     *
+     * @deprecated Goes against dependency injection.
+     *             Use {@link #CRServoEx(HardwareMap, String, Encoder, CRServoEx.RunMode)} instead.
      */
+    @Deprecated
     @SuppressWarnings("unchecked")
     public CRServoEx(HardwareMap hwMap, String id, String encoderID, double analogRange, AngleUnit angleUnit, RunMode runmode) {
         super(hwMap, id);
@@ -75,7 +79,7 @@ public class CRServoEx<T extends Encoder<?, ?>> extends CRServo {
      *
      * <p> Example Usage: </p>
      * <pre>{@code
-     * CRServoEx<T> = new CrServoEx<>(
+     * CRServoEx<T> servo = new CrServoEx<>(
      *     hardwareMap,
      *     "servoId",
      *     encoder,
@@ -97,7 +101,7 @@ public class CRServoEx<T extends Encoder<?, ?>> extends CRServo {
      * A simple constructor for the CR Servo with no absolute encoder.
      *
      * <p> Example Usage: </p>
-     * <pre>{@code CRServoEx<?> = new CrServoEx<>(hardwareMap, "servoId")}</pre>
+     * <pre>{@code CRServoEx<?> servo = new CrServoEx<>(hardwareMap, "servoId")}</pre>
      *
      * @param hwMap hardwareMap
      * @param id ID of the CR servo as configured
