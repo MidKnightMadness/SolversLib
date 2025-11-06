@@ -69,7 +69,7 @@ public class CallbackCommand<T extends Command> implements Command {
      * @param action Consumer for using the inner command
      * @return Itself for chaining purposes
      */
-    public CallbackCommand<T> when(BooleanSupplier condition, Consumer<T> action) {
+    public CallbackCommand<T> whenSelf(BooleanSupplier condition, Consumer<T> action) {
         whenConsumers.put(condition, action);
         return this;
     }
