@@ -108,7 +108,7 @@ public interface SensorDistanceEx extends SensorDistance {
          */
         public void setThreshold(double threshold) {
             this.minThreshold = Math.max((target - threshold) / 2.0, 0);
-            this.minThreshold = Math.max((target + threshold) / 2.0, 0);
+            this.maxThreshold = Math.max((target + threshold) / 2.0, 0);
         }
 
         /**

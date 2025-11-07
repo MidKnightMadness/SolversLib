@@ -22,6 +22,7 @@ dependencies {
     implementation("org.ejml:ejml-simple:0.39") {
         exclude(group = "org.ejml", module = "ejml-all")
     }
+    implementation("org.openftc:opencv-repackaged-bundled-dylibs:4.10.0-A")
 }
 
 dairyPublishing {
