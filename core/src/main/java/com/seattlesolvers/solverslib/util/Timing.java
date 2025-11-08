@@ -31,7 +31,7 @@ public class Timing {
         public Stopwatch(TimeUnit unit) {
             this.unit = unit;
             this.time = new ElapsedTime();
-            start();
+            start(true);
         }
 
         /**
@@ -43,12 +43,21 @@ public class Timing {
 
         /**
          * Starts or restarts this timer.
+         *
+         * @param paused Pause the timer when resetting
          */
-        public void start() {
+        public void start(boolean paused) {
             time.reset();
             pauseTime = 0;
             previousTime = 0;
-            timerOn = true;
+            timerOn = !paused;
+        }
+
+        /**
+         * Starts or restarts this timer.
+         */
+        public void start() {
+            start(false);
         }
 
         /**
