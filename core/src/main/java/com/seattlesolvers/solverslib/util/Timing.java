@@ -17,11 +17,11 @@ public class Timing {
      * {@link ElapsedTime} object.
      */
     public static class Stopwatch {
-        private ElapsedTime time;
-        private long pauseTime; // in nanoseconds, regardless of unit
-        private long previousTime;
-        private final TimeUnit unit;
-        private boolean timerOn;
+        protected ElapsedTime time;
+        protected long pauseTime; // in nanoseconds, regardless of unit
+        protected long previousTime;
+        protected final TimeUnit unit;
+        protected boolean timerOn;
 
         /**
          * Creates a new timer object.
@@ -31,9 +31,7 @@ public class Timing {
         public Stopwatch(TimeUnit unit) {
             this.unit = unit;
             this.time = new ElapsedTime();
-            this.timerOn = false;
-            this.previousTime = 0;
-            time.reset();
+            start();
         }
 
         /**
@@ -87,7 +85,10 @@ public class Timing {
         }
 
         public long deltaTime() {
-            return elapsedTime() - previousTime;
+            long now = elapsedTime();
+            long delta = now - previousTime;
+            previousTime = now;
+            return delta;
         }
 
         /**
@@ -108,7 +109,7 @@ public class Timing {
      * {@link ElapsedTime} object.
      */
     public static class Timer extends Stopwatch {
-        private final long timerLength;
+        protected final long timerLength;
 
         /**
          * Creates a new timer object.
@@ -157,8 +158,8 @@ public class Timing {
      */
     public class Rate {
 
-        private ElapsedTime time;
-        private long rate;
+        protected ElapsedTime time;
+        protected long rate;
 
         public Rate(long rateMillis) {
             rate = rateMillis;
