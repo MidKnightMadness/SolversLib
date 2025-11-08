@@ -93,6 +93,12 @@ public class Timing {
             else return unit.convert(pauseTime, TimeUnit.NANOSECONDS);
         }
 
+        /**
+         * Gets the time since {@link #start()} or {@link #deltaTime()} was last called.
+         * Useful for finding loop times.
+         *
+         * @return The requested time gap
+         */
         public long deltaTime() {
             long now = elapsedTime();
             long delta = now - previousTime;
