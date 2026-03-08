@@ -41,6 +41,8 @@ public class InterpLUTTest {
         lut.add(4, 4);
         lut.createLUT();
         assertEquals(2, lut.get(2), 0.000001);
+        assertEquals(1, lut.get(1), 0.000001);
+        assertEquals(4, lut.get(4), 0.000001);
     }
 
     @Test

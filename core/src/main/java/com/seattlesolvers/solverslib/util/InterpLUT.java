@@ -127,11 +127,11 @@ public class InterpLUT {
         }
 
         // Returns the min/max y-value if the value requested is out of bounds
-        if (input <= mX.get(0)) {
+        if (input < mX.get(0)) {
             return mY.get(0);
         }
 
-        if (input >= mX.get(n - 1)) {
+        if (input > mX.get(n - 1)) {
             return mY.get(n - 1);
         }
 
